@@ -1,0 +1,41 @@
+table {
+    border: 1px solid #ccc;
+}
+
+table td {
+    border: 1px solid #ccc;
+}
+
+.tools {
+    button {
+        margin: 10px 0 10px 10px;
+    }
+}
+
+.primary-button {
+    background-color: #2C68EA;
+}
+
+button {
+    &.approved {
+        mat-icon {
+            color: #077e3a;
+        }
+    }
+    &.pending {
+        mat-icon {
+            color: #f9aa01;
+        }
+    }
+    &.notapproved {
+        mat-icon {
+            color: #ff0000;
+        }
+    }
+}
+
+.add-post button {
+    background-color: #2E68ED;
+    border-radius: 20px;
+    color: #fff;
+}

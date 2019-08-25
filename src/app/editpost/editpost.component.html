@@ -1,0 +1,92 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <h2>
+        <a routerLink="/">
+            <mat-icon class="back-icon"> keyboard_backspace </mat-icon>
+        </a>CR Request Detail - 11209-01</h2>
+    <div class="tools">
+
+        <button mat-mini-fab color="primary" class="btn-blue-bg">
+            <mat-icon> add </mat-icon>
+          </button>
+
+
+    </div>
+
+</div>
+<div class="form-container">
+    <form [formGroup]="editPostForm">
+        <div class="left-section">
+            <mat-form-field>
+                <label>CR Number</label>
+                <input matInput placeholder="" formControlName="crno" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <label>Raised On</label>
+                <input matInput [matDatepicker]="picker" placeholder="">
+                <mat-datepicker-toggle matSuffix [for]="picker" class="mat-icon-input"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-radio-group aria-label="Raised By" class="raisedby">
+                <label>Raised By</label><br>
+                <mat-radio-button value="1">Compunnel</mat-radio-button>
+                <mat-radio-button value="2">Client</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field appearance="legacy" class="mat-icons-input">
+                <label>Effort</label>
+
+                <input matInput placeholder="">
+                <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
+                <mat-hint>Hrs</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="mat-icons-input">
+                <label>Total</label>
+                <input matInput placeholder="">
+                <mat-icon class="mat-icon-input" matSuffix>monetization_on</mat-icon>
+                <mat-hint></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="right-section">
+            <mat-form-field class="descrip">
+                <label>Description</label>
+                <textarea matInput placeholder=""></textarea>
+            </mat-form-field>
+            <mat-form-field class="input-boxes">
+                <label>Shared with Client</label>
+                <input matInput [matDatepicker]="picker1" placeholder="">
+                <mat-datepicker-toggle matSuffix [for]="picker1" class="mat-icon-input"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="input-boxes">
+                <label>Status</label>
+                <mat-select placeholder="" class="select-input">
+                    <mat-option *ngFor="let StatusList of StatusList" value="{{StatusList.ApprovedStatusId}}">{{StatusList.ApprovedStatusName}}</mat-option>
+
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="descrip">
+                <label>Comment</label>
+                <textarea matInput placeholder=""></textarea>
+            </mat-form-field>
+
+
+
+        </div>
+
+
+        <!-- <ngx-file-picker
+    [adapter]="adapter"
+    [fileExtensions]="['pdf']"
+    >
+    </ngx-file-picker> -->
+        <br/>
+
+        <button *ngIf="!editMode" type="submit" (click)="onSubmit()">Save</button>
+        <button *ngIf="editMode" type="submit" (click)="onSubmit()">Cancel</button>
+    </form>
+
+    <div *ngIf="isAdded">{{confermationStr}}</div>
+
+</div>
+
+<span *ngIf="editMode">{{id}}</span>

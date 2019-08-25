@@ -1,0 +1,90 @@
+.form-container {
+    width: 100%;
+    background-color: #fff;
+    font-size: 12px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.left-section,
+.right-section {
+    width: 50%;
+    float: left;
+}
+
+.descrip {
+    width: 93%;
+}
+
+.right-section>* textarea {
+    padding-top: 70px;
+}
+
+.left-section>* {
+    padding-left: 20px;
+    width: 45%;
+}
+
+.right-section>* {
+    padding-left: 20px;
+}
+
+.left-section>* label,
+.right-section>* label {
+    color: #3B71ED;
+    font-size: 14px;
+}
+
+.left-section>* input,
+.right-section>* input,
+.input-boxes input {
+    padding-top: 15px;
+}
+
+.datepicker-icon {
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+.raisedby label {
+    padding-left: 0px;
+    display: inline-block;
+}
+
+.mat-icons-input {
+    padding-top: 20px;
+}
+
+.input-boxes {
+    width: 45%;
+    float: left;
+}
+
+.mat-icon-input {
+    position: absolute;
+    right: 2px;
+    top: 7px;
+    font-size: 20px;
+}
+
+.select-input {
+    margin-top: 14px;
+}
+
+.mat-radio-group>* {
+    padding-left: 20px;
+    width: 43%;
+    padding-top: 20px;
+}
+
+.back-icon {
+    margin-right: 10px;
+    vertical-align: sub;
+    color: #676A73;
+}
+
+.btn-blue-bg {
+    background-color: #2D6FE9;
+}

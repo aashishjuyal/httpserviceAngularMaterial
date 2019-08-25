@@ -1,0 +1,51 @@
+table {
+    width: 100%
+}
+
+.status-button {
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+    width: 100px;
+    /* height: 30px; */
+    display: block;
+    text-align: center;
+}
+
+.approved-row {
+    background-color: #D4F5EA;
+    color: #6A9F85;
+}
+
+.onhold-row {
+    background-color: #E7E8EC;
+    color: #838695;
+}
+
+.notapproved-row {
+    background-color: #FFE2E4;
+    color: #B25C5F;
+}
+
+.pending-row {
+    background-color: #FBF2C9;
+    color: #7E6638;
+}
+
+.mat-elevation-z8 th {
+    color: #9A9CA8;
+    font-weight: 700;
+}
+
+.mat-elevation-z8 td {
+    color: #92959C;
+}
+
+.document-attach {
+    color: #DADBDF;
+}
+
+.attachment-data {
+    vertical-align: super;
+}

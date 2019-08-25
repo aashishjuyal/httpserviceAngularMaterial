@@ -1,0 +1,100 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- Id Column -->
+    <!-- <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container> -->
+
+    <!-- CR NO Column -->
+    <ng-container matColumnDef="crno">
+        <th mat-header-cell *matHeaderCellDef> CR NO </th>
+        <td mat-cell *matCellDef="let element"> {{element.ProjectId}}-{{element.CrId}} </td>
+    </ng-container>
+
+    <!-- Desc Column -->
+    <ng-container matColumnDef="desc">
+        <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+        <td mat-cell *matCellDef="let element"> {{element.ChangeDescription}} </td>
+    </ng-container>
+
+    <!-- Raised By Column -->
+    <ng-container matColumnDef="raisedby">
+        <th mat-header-cell *matHeaderCellDef> RAISED BY </th>
+        <td mat-cell *matCellDef="let element"> {{raisedByVal(element.RaisedBy)}} </td>
+    </ng-container>
+
+    <!-- Raised On Column -->
+    <ng-container matColumnDef="raisedon">
+        <th mat-header-cell *matHeaderCellDef> RAISED ON </th>
+        <td mat-cell *matCellDef="let element"> {{element.RaisedOn}} </td>
+    </ng-container>
+
+    <!-- Effort Column -->
+    <ng-container matColumnDef="effort">
+        <th mat-header-cell *matHeaderCellDef> EFFORT </th>
+        <td mat-cell *matCellDef="let element"> {{element.EffortHours}} </td>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> TOTALS </th>
+        <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> STATUS </th>
+        <td class="" mat-cell *matCellDef="let element">
+            <span class="{{getType(element.ApprovalStatus) | lowercase | removewhitespaces}}-row status-button"> {{getType(element.ApprovalStatus)}} </span>
+        </td>
+    </ng-container>
+
+
+
+
+    <!-- Attachment Column -->
+    <ng-container matColumnDef="attachments">
+        <th mat-header-cell *matHeaderCellDef> ATTACHMENT </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon class="document-attach">insert_drive_file</mat-icon><span class="attachment-data">{{element.Documents.length}} </span> </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deletePost(element.CrId)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+                <button mat-menu-item [routerLink]="['/editPost/', element.CrId]">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

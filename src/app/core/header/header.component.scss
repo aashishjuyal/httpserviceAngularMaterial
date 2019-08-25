@@ -1,0 +1,50 @@
+.example-icon {
+    padding: 0 14px;
+}
+
+.title {
+    flex: 1 1 auto;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.title span {
+    color: #0573da;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0 10px;
+    background-color: #E1EAFB;
+}
+
+span.logo-border {
+    border-right: 1px solid grey;
+    margin: 13px 7px 9px 7px;
+}
+
+span.logo-text {
+    color: #0850DA;
+    vertical-align: middle;
+    font-size: 18px;
+    /* font-weight: bold; */
+    margin-top: 6px;
+}
+
+.navbar-mid p span {
+    background-color: #E1E9FC;
+    color: #5781E7;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 2px;
+    margin-right: 5px;
+}
+
+.header {
+    background-color: #fff;
+    height: 75px;
+}
+
+.header a {
+    display: flex;
+    text-decoration: none;
+}

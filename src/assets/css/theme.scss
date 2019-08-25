@@ -1,0 +1,113 @@
+@import '~@angular/material/theming';
+
+body {
+    font-family: DINPro-Regular;
+    font-size: 14px;
+    background: #e9e9e9;
+}
+
+main {
+    padding: 20px;
+}
+
+// ###############
+// ##   Fonts   ##
+// ###############
+// for text
+@font-face {
+  font-family: DINPro-Black;
+  src: url("../fonts/DINPro-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: DINPro-Light;
+  src: url("../fonts/DINPro-Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: DINPro-Medium;
+  src: url("../fonts/DINPro-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: DINPro-Regular;
+  src: url("../fonts/DINPro-Regular.otf") format("opentype");
+}
+
+// $custom-typography: mat-typography-config($font-family: 'DINPro-Regular');
+
+// // ################
+// // ##   Themes   ##
+// // ################
+// // define a real custom palette (using http://mcg.mbitson.com)
+// $bv-red: ( 50: #f6e0e6,
+// 100: #e7b3c0,
+// 200: #d88096,
+// 300: #c84d6c,
+// 400: #bc264d,
+// 500: #b0002d,
+// 600: #a90028,
+// 700: #a00022,
+// 800: #97001c,
+// 900: #870011,
+// A100: #ffb3b8,
+// A200: #ff8088,
+// A400: #ff4d58,
+// A700: #ff3440,
+// contrast: ( 50: $black-87-opacity,
+// 100: $black-87-opacity,
+// 200: $black-87-opacity,
+// 300: #ffffff,
+// 400: #ffffff,
+// 500: #ffffff,
+// 600: #ffffff,
+// 700: #ffffff,
+// 800: #ffffff,
+// 900: #ffffff,
+// A100: $black-87-opacity,
+// A200: $black-87-opacity,
+// A400: $black-87-opacity,
+// A700: #ffffff,
+// ));
+// $bv-gray: ( 50: #ededeb,
+// 100: #d2d1ce,
+// 200: #b4b2ae,
+// 300: #95938d,
+// 400: #7f7c74,
+// 500: #68655c,
+// 600: #605d54,
+// 700: #55534a,
+// 800: #4b4941,
+// 900: #3a3730,
+// A100: #fae391,
+// A200: #f8d660,
+// A400: #ffcf26,
+// A700: #ffc90d,
+// contrast: ( 50: $black-87-opacity,
+// 100: $black-87-opacity,
+// 200: $black-87-opacity,
+// 300: $black-87-opacity,
+// 400: #ffffff,
+// 500: #ffffff,
+// 600: #ffffff,
+// 700: #ffffff,
+// 800: #ffffff,
+// 900: #ffffff,
+// A100: $black-87-opacity,
+// A200: $black-87-opacity,
+// A400: $black-87-opacity,
+// A700: $black-87-opacity));
+
+// // mandatory stuff for theming
+// $bv-pp-primary: mat-palette($bv-red);
+// $bv-pp-accent : mat-palette($bv-gray);
+
+// // include the custom theme components into a theme object
+// $bv-pp-theme: mat-light-theme($bv-pp-primary,
+// $bv-pp-accent);
+
+// // include the custom theme object into the angular material theme
+// @include angular-material-theme($bv-pp-theme);
+
+// // include the custom typography object into the angular material
+// @include mat-core($custom-typography);
