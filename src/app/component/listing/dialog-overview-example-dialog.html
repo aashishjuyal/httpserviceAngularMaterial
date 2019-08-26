@@ -1,0 +1,12 @@
+<div mat-dialog-content flex-container>
+
+    <div class="popup-icon">
+        <mat-icon>error_outline</mat-icon>
+    </div>
+    <h1 mat-dialog-title>Are you sure?</h1>
+    <p>You will not be able to recover this record!</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Yes, delete it!</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>No, Keep it</button>
+</div>

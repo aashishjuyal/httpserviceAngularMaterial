@@ -130,13 +130,12 @@ export class EditpostComponent implements OnInit {
       const element = this.files[index];
       formData.append('file', element); 
     }
-    console.log(formData);
     if (this.editMode) {
+      console.log("edit");
       this.updatePost(post.CrId, formData)
     }
     else {
-      console.log(formData);
-      let formSubmitData = 
+      console.log("Add"); 
       this.createPost(formData)
 
     }

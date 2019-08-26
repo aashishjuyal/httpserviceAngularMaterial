@@ -1,12 +1,18 @@
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Post } from './../../models/post';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-listing',
@@ -14,6 +20,8 @@ import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./listing.component.scss']
 })
 export class ListingComponent implements OnInit {
+  animal: string;
+  name: string;
   dataSource: any;
   displayedColumns: string[] = ['select', 'crno', 'desc', 'raisedby', 'raisedon', 'effort', 'total', 'status','attachments', 'action'];
   selection = new SelectionModel<Post>(true, []);
@@ -24,12 +32,14 @@ export class ListingComponent implements OnInit {
 
   constructor(private service: PostService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
     this.dataSource = [];
    
   }
 
   ngOnInit() {
+    localStorage.setItem("projectId","2003");
     this.getAllPosts();
     this.service.getApprovedStatus().subscribe(responseData => {
       this.StatusList  = responseData.Content.Result;
@@ -67,6 +77,8 @@ export class ListingComponent implements OnInit {
     //console.log(post);
 
     this.showmodel=true;
+
+
     
     if (confirm('Are you sure?')) { // proper popup
       this.service.deletePost(CrId)
@@ -104,6 +116,32 @@ export class ListingComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }
