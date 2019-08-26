@@ -13,7 +13,8 @@ import { PostService } from './services/post.service';
 import { EditpostComponent } from './editpost/editpost.component';
 import { FilePickerModule } from 'ngx-awesome-uploader';
 import { HeaderComponent } from './core/header/header.component';
-import { ListingComponent,DialogOverviewExampleDialog } from './component/listing/listing.component';
+import { ListingComponent } from './component/listing/listing.component';
+import { DialogBox } from './dialogbox/dialogbox.component';
 import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
 import { DragDropDirective } from './directive/drag-drop.directive';
 import { ToastrModule } from 'ngx-toastr';
@@ -28,7 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
     RemovewhitespacesPipe,
     DragDropDirective,
     ListingComponent,
-    DialogOverviewExampleDialog
+    DialogBox
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot()
 
   ],
-  entryComponents: [ListingComponent, DialogOverviewExampleDialog],
+  entryComponents: [ListingComponent, DialogBox],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

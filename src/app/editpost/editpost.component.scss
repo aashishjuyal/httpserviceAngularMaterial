@@ -94,17 +94,36 @@
     background-repeat: no-repeat;
     background-size: 100px;
     background-position: center;
-    height: 200px;
-    width: 80%;
+    height: 110px;
+    width: 100%;
     margin: 20px auto;
     border: 2px dashed #1C8ADB;
     border-radius: 10px;
+}
+
+.left-section .upload-area {
+    width: 92%;
+}
+
+.upload-area .upload-icon {
+    color: #D8E3F7;
+    font-size: 60px;
 }
 
 .uploadfilecontainer:hover {
     cursor: pointer;
     background-color: #9ecbec !important;
     opacity: 0.8;
+}
+
+.uploadfilecontainer {
+    background-color: #FAFBFF !important;
+    display: flex;
+}
+
+.upload-inner {
+    width: 33%;
+    text-align: center;
 }
 
 .files-list {

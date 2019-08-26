@@ -22,11 +22,76 @@ html {
     text-align: center;
 }
 
-.dialogue-del .mat-icon {
-    font-size: 100px;
+.popup-icon {
+    text-align: center;
+    justify-content: center;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    line-height: 5em;
+    display: inline-block;
+}
+
+.popup-icon span {
+    font-size: -webkit-xxx-large;
+}
+
+.popup {
+    text-align: center;
+}
+
+.popup h1 {
+    font-weight: bold;
+    font-size: 28px;
+    margin: 0px;
+    padding-top: 20px;
+}
+
+.popup p {
+    color: #545454;
+    font-size: 1.125em;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+.mat-dialog-actions {
+    display: block !important;
+    text-align: center;
+}
+
+.dialogue-btn {
+    border-radius: 5px;
+    background-color: #3085d6;
+    color: #fff;
+}
+
+.dialogue-cancel {
+    background-color: #aaa;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.cancelled-icon {
+    border: .25em solid #9de0f6;
+    color: #3fc3ee;
+}
+
+.delete-icon {
+    border: .25em solid #facea8;
     color: #f8bb86;
 }
 
-.del-popup {
-    width: 32em;
+.cancelled-ok {
+    width: 25%;
+    font-size: 17px;
+}
+
+.success-icon {
+    border: .25em solid #a5dc86;
+    color: #a5dc86;
+}
+
+.success-icon .mat-icon {
+    font-size: 40px;
+    margin-right: 15px;
 }

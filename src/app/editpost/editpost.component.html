@@ -46,10 +46,16 @@
                 <mat-hint></mat-hint>
             </mat-form-field>
 
-            <div appearance="legacy" class="mat-icons-input">
+            <div appearance="legacy" class="mat-icons-input upload-area">
                 <label>CR Document</label>
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                <div class="uploadfilecontainer flex-container" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
                     <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                    <div class="upload-inner">
+                        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+                    </div>
+                    <div class="upload-inner">OR</div>
+                    <div class="upload-inner">choose file</div>
+
                 </div>
                 <div class="files-list" *ngFor="let file of files;let i=index">
                     <p>{{ files[i].name }}</p>
