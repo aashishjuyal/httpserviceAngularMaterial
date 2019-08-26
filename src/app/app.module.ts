@@ -15,6 +15,9 @@ import { FilePickerModule } from 'ngx-awesome-uploader';
 import { HeaderComponent } from './core/header/header.component';
 import { ListingComponent } from './component/listing/listing.component';
 import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
+import { DragDropDirective } from './directive/drag-drop.directive';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -24,7 +27,8 @@ import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
     EditpostComponent,
     HeaderComponent,
     ListingComponent,
-    RemovewhitespacesPipe
+    RemovewhitespacesPipe,
+    DragDropDirective
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
     FilePickerModule,
 
     // Flex-layout
-    FlexLayoutModule
+    FlexLayoutModule,
+
+    ToastrModule.forRoot()
 
   ],
   providers: [PostService],

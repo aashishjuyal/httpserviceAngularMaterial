@@ -20,7 +20,11 @@ export class PostService {
       'Content-Type': 'application/json'
     })
   }
-
+  httpPostOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
   // Handle API errors
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
@@ -75,11 +79,10 @@ export class PostService {
 
 
   // Create a new post
-  createPost(post): Observable<Post> {
+  createPost(post): Observable<ResponseFormat> {
     return this.http
-      .post<Post>(this.dataUrl, JSON.stringify(post), this.httpOptions)
+      .post<ResponseFormat>(this.compunnalapi + 'ChangeRequest/', post)
       .pipe(
-      retry(2),
       catchError(this.handleError)
       )
   }
@@ -88,9 +91,8 @@ export class PostService {
   // Update post by id
   updatePost(id, post): Observable<Post> {
     return this.http
-      .put<Post>(this.dataUrl + '/' + id, JSON.stringify(post), this.httpOptions)
+      .put<Post>(this.compunnalapi + 'ChangeRequest/' + id, post)
       .pipe(
-      retry(2),
       catchError(this.handleError)
       )
   }

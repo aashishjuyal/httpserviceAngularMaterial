@@ -7,6 +7,7 @@ import { PostService } from '../../services/post.service';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -18,6 +19,8 @@ export class ListingComponent implements OnInit {
   selection = new SelectionModel<Post>(true, []);
   StatusList: any = [];
   RaisedBy: any = [];
+  loading: boolean = true;
+  showmodel: boolean = false;
 
   constructor(private service: PostService,
     private router: Router,
@@ -41,6 +44,8 @@ export class ListingComponent implements OnInit {
     this.service.getPostsList()
       .subscribe(response => {
         this.dataSource = new MatTableDataSource<Post>(response.Content.Result);
+
+        this.loading = false;
       })
 
   }
@@ -60,6 +65,8 @@ export class ListingComponent implements OnInit {
   }
   deletePost(CrId) {
     //console.log(post);
+
+    this.showmodel=true;
     
     if (confirm('Are you sure?')) { // proper popup
       this.service.deletePost(CrId)
