@@ -2,7 +2,7 @@ import { Post } from './../models/post';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { CustomFilePickerAdapter } from './../custom-file-picker.adapter';
@@ -11,6 +11,9 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogBox } from '../dialogbox/dialogbox.component';
+import { ConsoleReporter } from 'jasmine';
 
 const moment = _rollupMoment || _moment;
 
@@ -21,40 +24,33 @@ const moment = _rollupMoment || _moment;
   styleUrls: ['./editpost.component.scss']
 })
 export class EditpostComponent implements OnInit {
-  confermationStr: string = "New post has been added.";
-
-  isAdded: boolean = false;
   id: number;
   statusVal:number;
   RaisedByVal:number;
-
   post: ResponseFormat;
   StatusList: any = [];
   RaisedBy: any = [];
-
   editMode = false;
-  posts: any = [];
   files: any = [];
   editPostForm: FormGroup;
-  editData: any = [];
-
   adapter = new CustomFilePickerAdapter(this.http);
-
-
 
   constructor(private service: PostService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient) {
+    private http: HttpClient,
+    public dialog: MatDialog) {
     this.post = new ResponseFormat();
   }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.editMode = this.id != null;
+
     this.service.getApprovedStatus().subscribe(responseData => {
       this.StatusList  = responseData.Content.Result;
     })
+
     this.service.getRaisedBy().subscribe(responseData => {
       for (let index = 0; index < responseData.Content.Result.length; index++) {
         const element = responseData.Content.Result[index];
@@ -67,9 +63,9 @@ export class EditpostComponent implements OnInit {
     this.editPostForm = new FormGroup({
       'CrId': new FormControl(''),
       'CrEditId': new FormControl(''),
-      'desc': new FormControl(''),
+      'desc': new FormControl('',Validators.required),
       'raisedby': new FormControl(''),
-      'RaisedOn': new FormControl(''),
+      'RaisedOn': new FormControl('',Validators.required),
       'effort': new FormControl(''),
       'total': new FormControl(''),
       'status': new FormControl(''),
@@ -79,13 +75,16 @@ export class EditpostComponent implements OnInit {
       'SharedWithCustomerOn': new FormControl('')
     })
     this.editPostForm.get('ProjectId').setValue(localStorage.getItem("projectId"));
+    this.editPostForm.get('status').setValue(1001);
+    this.editPostForm.get('raisedby').setValue(2002);
     this.editPostForm.get('CrEditId').setValue(0);
+    this.editPostForm.get('effort').setValue(0);
+    this.editPostForm.get('total').setValue(0);
     this.editPostForm.get('CrId').disable();
 
     if (this.editMode == true) {
       this.service.getPost(this.id).subscribe(responseData => {
         this.post = responseData;
-        this.editData = this.post.Content.Result;
         this.statusVal = this.post.Content.Result.ApprovalStatus;
         this.RaisedByVal = this.post.Content.Result.RaisedBy;
         for (let index = 0; index < this.post.Content.Result.Documents.length; index++) {
@@ -112,6 +111,9 @@ export class EditpostComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.editPostForm.status == "INVALID"){
+      return true;
+    }
     let post: Post = {
       CrId:this.editPostForm.value.CrEditId,
       ProjectId:this.editPostForm.value.ProjectId,
@@ -131,33 +133,43 @@ export class EditpostComponent implements OnInit {
       formData.append('file', element); 
     }
     if (this.editMode) {
-      console.log("edit");
       this.updatePost(post.CrId, formData)
     }
     else {
-      console.log("Add"); 
       this.createPost(formData)
 
     }
-    //this.editPostForm.reset();
-
   }
   formatDate(dateVal){
-    return moment(dateVal).format('YYYY-MM-DDTHH:mm:ss')+"Z";
+    if(dateVal){
+      return moment(dateVal).format('YYYY-MM-DDTHH:mm:ss')+"Z";
+    }else{
+      return "";
+    }
   }
   updatePost(postId, post) {
     this.service.updatePost(postId, post)
       .subscribe(response => {
-        this.router.navigate(['/']);
+        const dialogRef = this.dialog.open(DialogBox, {
+          width: '32em !important',
+          data: {isSuccess: true,action:"successCR",actionMessage:"updated"}
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.router.navigate(['/']);
+        });
       })
   }
 
   createPost(post) {
     this.service.createPost(post)
       .subscribe(response => {
-        console.log(response);
-        this.isAdded = true;
-        setTimeout(() => { this.isAdded = false; }, 3000);
+        const dialogRef = this.dialog.open(DialogBox, {
+          width: '32em !important',
+          data: {isSuccess: true,action:"successCR",actionMessage:"added"}
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.router.navigate(['/']);
+        });
       })
   }
 

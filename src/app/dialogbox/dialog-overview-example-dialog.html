@@ -1,6 +1,5 @@
-<div class="confirmation-dialogue-box" style="display:none;">
+<!--<div *ngIf="data.isConfirm" class="confirmation-dialogue-box">
     <div mat-dialog-content class="popup ">
-
         <div class="popup-icon delete-icon">
             <span>!</span>
         </div>
@@ -9,12 +8,30 @@
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick() " class="dialogue-btn ">Yes, delete it!</button>
-        <button mat-button [mat-dialog-close]="data.animal " class="dialogue-cancel ">No, Keep it</button>
+        <button mat-button (click)="doAction('yes')" class="dialogue-btn ">Yes, delete it!</button>
+        <button mat-button (click)="doAction('no')" class="dialogue-cancel ">No, Keep it</button>
+    </div>
+</div>-->
+<div *ngIf="data.isConfirm" class="download-dialogue-box">
+    <div mat-dialog-content class="popup ">
+
+        <h1 mat-dialog-title>Uploaded Documents</h1>
+        <div class="uploaded-section">
+
+            <p>{{ files[i].name }}</p>
+            <button class="delete-file">
+                   <mat-icon>insert_drive_file</mat-icon> 
+                </button>
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="doAction('yes')" class="dialogue-btn ">Yes, delete it!</button>
+        <button mat-button (click)="doAction('no')" class="dialogue-cancel ">No, Keep it</button>
     </div>
 </div>
 
-<div class="confirmation-dialogue-box" style="display:none;">
+<div *ngIf="data.isCancelled" class="confirmation-dialogue-box">
     <div mat-dialog-content class="popup ">
 
         <div class="popup-icon cancelled-icon ">
@@ -25,23 +42,23 @@
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick() " class="dialogue-btn cancelled-ok">OK</button>
+        <button mat-button (click)="closeDialog() " class="dialogue-btn cancelled-ok">OK</button>
 
     </div>
 </div>
 
-<div class="confirmation-dialogue-box">
+<div *ngIf="data.isSuccess" class="confirmation-dialogue-box">
     <div mat-dialog-content class="popup ">
 
         <div class="popup-icon success-icon ">
             <span> <mat-icon>check</mat-icon></span>
         </div>
         <h1 mat-dialog-title>Success</h1>
-        <p>Your record has been added Successfully.</p>
+        <p>Your record has been {{data.actionMessage}} Successfully.</p>
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick() " class="dialogue-btn cancelled-ok">OK</button>
+        <button mat-button (click)="closeDialog() " class="dialogue-btn cancelled-ok">OK</button>
 
     </div>
 </div>

@@ -17,13 +17,22 @@ export interface DialogData {
   styleUrls: ['dialog-overview-example.css']
 })
 export class DialogBox {
-
+  action:string;
+  local_data:any;
+ 
   constructor(
     public dialogRef: MatDialogRef<DialogBox>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+    @Inject(MAT_DIALOG_DATA) public data:any) {
+    this.local_data = {...data};
+    this.action = this.local_data.action;
+  }
+ 
+  doAction(actionVal){
+    this.dialogRef.close({event:actionVal,data:this.local_data});
+  }
+ 
+  closeDialog(){
+    this.dialogRef.close({event:'Cancel'});
   }
 
 }

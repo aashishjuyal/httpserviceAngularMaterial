@@ -38,6 +38,7 @@
                 <input matInput placeholder="" formControlName="effort">
                 <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
                 <mat-hint>Hrs</mat-hint>
+
             </mat-form-field>
             <mat-form-field appearance="legacy" class="mat-icons-input">
                 <label>Total</label>
@@ -50,18 +51,27 @@
                 <label>CR Document</label>
                 <div class="uploadfilecontainer flex-container" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
                     <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
-                    <div class="upload-inner">
-                        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+                    <div class="upload-inner upload-doc">
+                        <mat-icon class="upload-icon">cloud_upload</mat-icon><br>
+                        <span>Drag and drop a file here</span>
                     </div>
                     <div class="upload-inner">OR</div>
-                    <div class="upload-inner">choose file</div>
+                    <div class="upload-inner"><span class="attach-file">choose file</span></div>
 
                 </div>
+                <p><i>Available Formats: DOC,PDF,XLS,CSV,ZIP. Size must be less than 25 MB.</i></p>
+
                 <div class="files-list" *ngFor="let file of files;let i=index">
-                    <p>{{ files[i].name }}</p>
-                    <button class="delete-file" (click)="deleteAttachment(i)">
-                            <img src="../../assets/Recycle_Bin_Full.png">
+                    <p class="file-desc">File Name <span>Action</span>
+                    </p>
+
+                    <div class="uploaded-section">
+
+                        <p>{{ files[i].name }}</p>
+                        <button class="delete-file">
+                           <mat-icon>more_vert</mat-icon> 
                         </button>
+                    </div>
                 </div>
             </div>
         </div>

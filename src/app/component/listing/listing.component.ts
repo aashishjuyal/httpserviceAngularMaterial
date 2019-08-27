@@ -22,6 +22,7 @@ export interface DialogData {
 })
 export class ListingComponent implements OnInit {
   animal: string;
+  isConfirm: boolean = true;
   name: string;
   dataSource: any;
   displayedColumns: string[] = ['select', 'crno', 'desc', 'raisedby', 'raisedon', 'effort', 'total', 'status','attachments', 'action'];
@@ -75,31 +76,25 @@ export class ListingComponent implements OnInit {
     return "-";
   }
   deletePost(CrId) {
-    //console.log(post);
-
-    this.showmodel=true;
-
-
-    
-    if (confirm('Are you sure?')) { // proper popup
-      this.service.deletePost(CrId)
+    this.service.deletePost(CrId)
         .subscribe(response => {
-          if(response.Success == true){
-            //show success message
-             this.getAllPosts();
-          }
-          else{
-            // show error message
-          }
-         
-        })
-    }
+          const dialogRef = this.dialog.open(DialogBox, {
+           
+            data: {isSuccess: true,action:"successCR",actionMessage:"deleted"}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            this.getAllPosts();
+          });
+    })
   }
   
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected;
-    const numRows = this.dataSource.data;
+    const numSelected = this.selection.selected.length;
+    let numRows = 0;
+    if(this.dataSource.data != undefined){
+      numRows = this.dataSource.data.length;
+    }
     return numSelected === numRows;
   }
 
@@ -117,15 +112,31 @@ export class ListingComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  openDialog(): void {
+  openDialog(crId): void {
     const dialogRef = this.dialog.open(DialogBox, {
-      width: '32em !important',
-      data: {name: this.name, animal: this.animal}
+      width: '500px !important',
+      data: {isConfirm: this.isConfirm,action:"deleteCR",crid:crId}
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
+      if(result != undefined){
+        if(result.event == "yes"){
+          this.deletePost(result.data.crid);
+        }else{
+          if(result.event == "no"){
+           
+            this.deleteCancelled();
+          }
+        }
+      }
     });
+  }
+  deleteCancelled(): void {
+      const dialogRef = this.dialog.open(DialogBox, {
+        width: '500px !important',
+        data: {isCancelled: true,action:"cancelledCR"}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
   }
 
 }

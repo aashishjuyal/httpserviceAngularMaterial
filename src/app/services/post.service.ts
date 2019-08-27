@@ -2,6 +2,7 @@ import { Post } from './../models/post';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
+import { map, publishReplay, refCount } from 'rxjs/operators';
 import { retry, catchError } from 'rxjs/operators';
 import { ResponseFormat } from '../models/responseFormat';
 
@@ -49,12 +50,19 @@ export class PostService {
 
 
 
-
-  getApprovedStatus(): Observable<ResponseFormat> {
-    return this.http.get<ResponseFormat>(this.compunnalapi + 'GetApprovedStatus');
+  private approvedStatus : Observable<ResponseFormat> = this.http.get<ResponseFormat>(this.compunnalapi + 'GetApprovedStatus').pipe(
+    publishReplay(3), 
+    refCount()
+  );
+  getApprovedStatus(){
+    return this.approvedStatus;
   }
-  getRaisedBy(): Observable<ResponseFormat> {
-    return this.http.get<ResponseFormat>(this.compunnalapi + 'GetRaiseBy');
+  private raisedBy : Observable<ResponseFormat> = this.http.get<ResponseFormat>(this.compunnalapi + 'GetRaiseBy').pipe(
+    publishReplay(3), 
+    refCount()
+  );
+  getRaisedBy() {
+    return this.raisedBy;
   }
 
   // Get all Posts data

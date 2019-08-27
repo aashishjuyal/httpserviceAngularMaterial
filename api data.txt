@@ -1,0 +1,19 @@
+http://inspirecrqa.compunnel.com/api/ChangeRequest
+json: {
+
+
+"CrId":0,
+"ProjectId":2003,
+"RaisedOn":"2019-08-29T18:30:00.000Z",
+"RaisedBy":2002,
+"ChangeDescription":"test api data",
+"EffortHours":10,
+"Total":10,
+"SharedWithCustomerOn":"2019-08-29T18:30:00.000Z",
+"ApprovalStatus":1004,
+"Comments":"test api data comment"
+
+}
+
+file: (binary)
+file: (binary)
