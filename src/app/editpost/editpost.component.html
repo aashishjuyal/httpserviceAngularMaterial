@@ -74,7 +74,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
         <div class="right-section">
             <mat-form-field class="descrip">
                 <label>Description</label>
@@ -103,14 +105,10 @@
         </div>
 
 
-        <!-- <ngx-file-picker
-        [adapter]="adapter"
-        [fileExtensions]="['pdf']"
-        >
-        </ngx-file-picker> -->
+
         <br/>
 
-        <button *ngIf="!editMode" type="submit" (click)="onSubmit()">Save</button>
+        <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn">Save</button>
         <button *ngIf="editMode" type="submit" (click)="onSubmit()">Cancel</button>
     </form>
 
