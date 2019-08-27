@@ -1,6 +1,6 @@
 import { Post } from './../models/post';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
 import { retry, catchError } from 'rxjs/operators';
@@ -65,6 +65,10 @@ export class PostService {
     return this.raisedBy;
   }
 
+
+  downloadFile(DocumentNameWithGuid,Id):Observable<HttpResponse<Blob>>{
+    return this.http.get<HttpResponse<Blob>>(this.compunnalapi + 'DownloadFileFromAws?id='+Id+'&fileName='+DocumentNameWithGuid);
+  }
   // Get all Posts data
   getPostsList(): Observable<ResponseFormat> {
     return this.http

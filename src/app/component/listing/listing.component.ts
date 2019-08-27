@@ -87,6 +87,17 @@ export class ListingComponent implements OnInit {
           });
     })
   }
+  showFiles(CrId,DocumentList){
+   //console.log(DocumentList)
+    const dialogRef = this.dialog.open(DialogBox, {
+           
+      data: {isDownload: true,DocList:DocumentList,Id:CrId}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAllPosts();
+    });
+  }
+
   
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

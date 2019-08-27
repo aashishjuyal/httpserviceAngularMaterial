@@ -74,7 +74,7 @@
     <ng-container matColumnDef="attachments">
         <th mat-header-cell *matHeaderCellDef> ATTACHMENT </th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="document-attach">insert_drive_file</mat-icon><span class="attachment-data">{{element.Documents.length}} </span> </td>
+            <mat-icon class="document-attach" (click)="showFiles(element.CrId, element.Documents)">insert_drive_file</mat-icon><span class="attachment-data">{{element.Documents.length}} </span> </td>
     </ng-container>
 
 
