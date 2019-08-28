@@ -8,7 +8,7 @@
         <mat-icon>filter_list</mat-icon>
       </button>
         <mat-menu #filter="matMenu">
-            <button *ngFor="let StatusList of StatusList" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
+            <button *ngFor="let StatusList of StatusList" (click)="doFilter(StatusList.ApprovedStatusId)" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
             <mat-icon>trip_origin</mat-icon>
             <span>{{StatusList.ApprovedStatusName}}</span>
         </button>
@@ -20,8 +20,6 @@
 </div>
 <app-listing></app-listing>
 <div fxLayout="row" fxLayoutAlign="end center" class="gc-margin-top-20 add-post">
-    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
     <button mat-raised-button color="" (click)="nvaigateToAdd()">
     <mat-icon>add</mat-icon> Add Post</button>
 </div>

@@ -1,7 +1,7 @@
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource,MatSort, MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Post } from './../../models/post';
-import { Component, OnInit, ViewChild,Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild,Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
@@ -9,23 +9,22 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogBox } from '../../dialogbox/dialogbox.component';
 
 
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.scss']
 })
-export class ListingComponent implements OnInit {
+export class ListingComponent implements OnInit,AfterViewInit {
   animal: string;
   isConfirm: boolean = true;
   name: string;
-  dataSource: any;
-  displayedColumns: string[] = ['select', 'crno', 'desc', 'raisedby', 'raisedon', 'effort', 'total', 'status','attachments', 'action'];
+  //dataSource: any;
+  public dataSource = new MatTableDataSource<Post>();
+
+  @ViewChild(MatSort,{ static: true }) sort: MatSort;
+  @ViewChild(MatPaginator,{ static: true }) paginator: MatPaginator;
+
+  displayedColumns: string[] = ['select', 'CrId', 'ChangeDescription', 'RaisedBy', 'RaisedOn', 'EffortHours', 'Total', 'ApprovalStatus','attachments', 'action'];
   selection = new SelectionModel<Post>(true, []);
   StatusList: any = [];
   RaisedBy: any = [];
@@ -36,10 +35,26 @@ export class ListingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog) {
-    this.dataSource = [];
-   
+    //this.dataSource = [];
+
+  }
+  ngAfterViewInit(): void {
+     this.dataSource.sort = this.sort;
+     this.dataSource.paginator = this.paginator;
   }
 
+  doFilter(value: string){
+    console.log(value);
+    const tableFilters = [];
+    tableFilters.push({
+      id: 'ApprovalStatus',
+      value: parseInt(value)
+    });
+    this.dataSource.filter = JSON.stringify(tableFilters);
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   ngOnInit() {
     localStorage.setItem("projectId","2003");
     this.getAllPosts();
@@ -48,14 +63,25 @@ export class ListingComponent implements OnInit {
     })
     this.service.getRaisedBy().subscribe(responseData => {
       this.RaisedBy  = responseData.Content.Result;
-    })
-    
+    });
+    this.dataSource.filterPredicate =
+  (data: Post, filtersJson: string) => {
+      const matchFilter = [];
+      const filters = JSON.parse(filtersJson);
+      filters.forEach(filter => {
+        const val = data[filter.id] === null ? '' : data[filter.id];
+        matchFilter.push(val == filter.value) ;
+      });
+        return matchFilter.every(Boolean);
+    };
+
   }
 
   getAllPosts() {
     this.service.getPostsList()
       .subscribe(response => {
-        this.dataSource = new MatTableDataSource<Post>(response.Content.Result);
+        this.dataSource.data = response.Content.Result as Post[];
+        //this.dataSource = new MatTableDataSource<Post>(response.Content.Result);
 
         this.loading = false;
       })
@@ -79,7 +105,7 @@ export class ListingComponent implements OnInit {
     this.service.deletePost(CrId)
         .subscribe(response => {
           const dialogRef = this.dialog.open(DialogBox, {
-           
+
             data: {isSuccess: true,action:"successCR",actionMessage:"deleted"}
           });
           dialogRef.afterClosed().subscribe(result => {
@@ -90,7 +116,7 @@ export class ListingComponent implements OnInit {
   showFiles(CrId,DocumentList){
    //console.log(DocumentList)
     const dialogRef = this.dialog.open(DialogBox, {
-           
+
       data: {isDownload: true,DocList:DocumentList,Id:CrId}
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -98,7 +124,7 @@ export class ListingComponent implements OnInit {
     });
   }
 
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -134,7 +160,7 @@ export class ListingComponent implements OnInit {
           this.deletePost(result.data.crid);
         }else{
           if(result.event == "no"){
-           
+
             this.deleteCancelled();
           }
         }

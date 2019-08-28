@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from '../services/post.service';
+import { ListingComponent } from '../component/listing/listing.component';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +15,8 @@ export class PostsComponent implements OnInit {
   StatusList: any = [];
   constructor(private service: PostService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private listing: ListingComponent) {
     this.posts = [];
   }
 
@@ -26,7 +28,9 @@ export class PostsComponent implements OnInit {
       })
 
   }
-
+  public doFilter(value): void {
+    this.listing.doFilter(value);
+  }
   // deletePost(post) {
   //   //console.log(post);
   //   if (confirm('Are you sure?')) {

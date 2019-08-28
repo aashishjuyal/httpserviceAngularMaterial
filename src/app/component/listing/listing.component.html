@@ -1,5 +1,10 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortStart="desc">
 
     <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -23,44 +28,45 @@
           </ng-container> -->
 
     <!-- CR NO Column -->
-    <ng-container matColumnDef="crno">
-        <th mat-header-cell *matHeaderCellDef> CR NO </th>
+    <ng-container matColumnDef="CrId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CR NO </th>
         <td mat-cell *matCellDef="let element"> {{element.ProjectId}}-{{element.CrId}} </td>
 
     </ng-container>
 
     <!-- Desc Column -->
-    <ng-container matColumnDef="desc">
-        <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+    <ng-container matColumnDef="ChangeDescription">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION </th>
         <td mat-cell *matCellDef="let element"> {{element.ChangeDescription}} </td>
     </ng-container>
 
     <!-- Raised By Column -->
-    <ng-container matColumnDef="raisedby">
+    <ng-container matColumnDef="RaisedBy">
         <th mat-header-cell *matHeaderCellDef> RAISED BY </th>
         <td mat-cell *matCellDef="let element"> {{raisedByVal(element.RaisedBy)}} </td>
     </ng-container>
 
+
     <!-- Raised On Column -->
-    <ng-container matColumnDef="raisedon">
-        <th mat-header-cell *matHeaderCellDef> RAISED ON </th>
+    <ng-container matColumnDef="RaisedOn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> RAISED ON </th>
         <td mat-cell *matCellDef="let element"> {{element.RaisedOn}} </td>
     </ng-container>
 
     <!-- Effort Column -->
-    <ng-container matColumnDef="effort">
+    <ng-container matColumnDef="EffortHours">
         <th mat-header-cell *matHeaderCellDef> EFFORT </th>
         <td mat-cell *matCellDef="let element"> {{element.EffortHours}} </td>
     </ng-container>
 
     <!-- Total Column -->
-    <ng-container matColumnDef="total">
+    <ng-container matColumnDef="Total">
         <th mat-header-cell *matHeaderCellDef> TOTALS </th>
         <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
     </ng-container>
 
     <!-- Status Column -->
-    <ng-container matColumnDef="status">
+    <ng-container matColumnDef="ApprovalStatus">
         <th mat-header-cell *matHeaderCellDef> STATUS </th>
         <td class="" mat-cell *matCellDef="let element">
             <span class="{{getType(element.ApprovalStatus) | lowercase | removewhitespaces}}-row status-button"> {{getType(element.ApprovalStatus)}} </span>
@@ -100,3 +106,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[2,4,5,10, 20, 50, 100]">
+</mat-paginator>

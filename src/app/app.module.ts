@@ -48,7 +48,7 @@ import { ToastrModule } from 'ngx-toastr';
 
   ],
   entryComponents: [ListingComponent, DialogBox],
-  providers: [PostService],
+  providers: [PostService,ListingComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
