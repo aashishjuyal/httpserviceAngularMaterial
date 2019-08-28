@@ -8,8 +8,10 @@
         <mat-icon>filter_list</mat-icon>
       </button>
         <mat-menu #filter="matMenu">
+            <span>clear all</span>
             <button *ngFor="let StatusList of StatusList" (click)="doFilter(StatusList.ApprovedStatusId)" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
             <mat-icon>trip_origin</mat-icon>
+           
             <span>{{StatusList.ApprovedStatusName}}</span>
         </button>
 
