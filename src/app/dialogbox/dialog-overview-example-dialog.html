@@ -16,18 +16,20 @@
     <div mat-dialog-content class="popup ">
 
         <h1 mat-dialog-title>Uploaded Documents</h1>
+        <h5 class="file-desc">File Name <span>Download</span></h5>
+
         <div class="uploaded-section" *ngFor="let Files of data.DocList">
 
             <p>{{ Files.DocumentName }}</p>
-            <button class="delete-file" (click)="downloadFile(Files.DocumentNameWithGuid, Files.Id)">
-                   <mat-icon>insert_drive_file</mat-icon> 
-                </button>
+            <div class="delete-file" (click)="downloadFile(Files.DocumentNameWithGuid, Files.Id)">
+                <mat-icon>insert_drive_file</mat-icon>
+            </div>
         </div>
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button (click)="doAction('yes')" class="dialogue-btn ">Yes, delete it!</button>
-        <button mat-button (click)="doAction('no')" class="dialogue-cancel ">No, Keep it</button>
+
+        <button mat-button (click)="doAction('no')" class="dialogue-cancel ">Cancel</button>
     </div>
 </div>
 

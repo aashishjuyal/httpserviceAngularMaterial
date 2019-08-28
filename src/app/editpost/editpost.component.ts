@@ -13,7 +13,7 @@ import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogBox } from '../dialogbox/dialogbox.component';
-import { ConsoleReporter } from 'jasmine';
+//import { ConsoleReporter } from 'jasmine';
 
 const moment = _rollupMoment || _moment;
 
@@ -63,9 +63,9 @@ export class EditpostComponent implements OnInit {
     this.editPostForm = new FormGroup({
       'CrId': new FormControl(''),
       'CrEditId': new FormControl(''),
-      'desc': new FormControl('',Validators.required),
-      'raisedby': new FormControl(''),
-      'RaisedOn': new FormControl('',Validators.required),
+      'desc': new FormControl('', [Validators.required]),
+      'raisedby': new FormControl('', [Validators.required]),
+      'RaisedOn': new FormControl('', [Validators.required]),
       'effort': new FormControl(''),
       'total': new FormControl(''),
       'status': new FormControl(''),

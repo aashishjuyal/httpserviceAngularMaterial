@@ -100,3 +100,42 @@ html {
     font-size: 40px;
     margin-right: 15px;
 }
+
+.download-dialogue-box h1 {
+    padding-top: 0px;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    display: flex;
+}
+
+.download-dialogue-box mat-icon {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.uploaded-section {
+    display: flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+}
+
+.download-dialogue-box .popup {
+    text-align: justify;
+}
+
+.file-desc span {
+    float: right;
+}
+
+.file-desc {
+    font-size: 14px;
+    font-weight: bold;
+    color: #676A73;
+}
+
+.uploaded-section p {
+    width: 90%
+}
+
+.download-dialogue-box button {
+    float: right;
+}
