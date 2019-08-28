@@ -24,6 +24,7 @@ const moment = _rollupMoment || _moment;
   styleUrls: ['./editpost.component.scss']
 })
 export class EditpostComponent implements OnInit {
+  crLabel: string;
   id: number;
   statusVal:number;
   RaisedByVal:number;
@@ -75,14 +76,20 @@ export class EditpostComponent implements OnInit {
       'SharedWithCustomerOn': new FormControl('')
     })
     this.editPostForm.get('ProjectId').setValue(localStorage.getItem("projectId"));
+  
     this.editPostForm.get('status').setValue(1001);
     this.editPostForm.get('raisedby').setValue(2002);
     this.editPostForm.get('CrEditId').setValue(0);
     this.editPostForm.get('effort').setValue(0);
     this.editPostForm.get('total').setValue(0);
+    this.editPostForm.get('CrId').setValue(localStorage.getItem("projectId"));
     this.editPostForm.get('CrId').disable();
 
     if (this.editMode == true) {
+      this.crLabel = (localStorage.getItem("ProjectId"));
+      this.crLabel = this.crLabel+'-'+ this.id;
+     
+ 
       this.service.getPost(this.id).subscribe(responseData => {
         this.post = responseData;
         this.statusVal = this.post.Content.Result.ApprovalStatus;
@@ -92,7 +99,7 @@ export class EditpostComponent implements OnInit {
           this.files.push(element.DocumentName)
         }
         this.editPostForm.setValue({
-          'CrId': this.post.Content.Result.CrId,
+          'CrId': this.post.Content.Result.ProjectId+'-'+this.post.Content.Result.CrId,
           'CrEditId':this.post.Content.Result.CrId,
           'ProjectId': this.post.Content.Result.ProjectId,
           'desc':  this.post.Content.Result.ChangeDescription,
@@ -181,6 +188,9 @@ export class EditpostComponent implements OnInit {
   }
   deleteAttachment(index) {
     this.files.splice(index, 1)
+  }
+  hasError = (controlName: string, errorName: string) =>{
+    return this.editPostForm.controls[controlName].hasError(errorName);
   }
 
   dateValue(val) {

@@ -100,19 +100,3 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<!--
-<div>
-    <ol>
-        <li>
-            <mat-form-field>
-                <input matInput [(ngModel)]="name" placeholder="What's your name?">
-            </mat-form-field>
-        </li>
-        <li>
-            <button mat-raised-button (click)="openDialog()">Pick one</button>
-        </li>
-        <li *ngIf="animal">
-            You chose: <i>{{animal}}</i>
-        </li>
-    </ol>
-</div>-->
