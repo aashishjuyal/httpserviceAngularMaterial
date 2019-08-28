@@ -86,7 +86,7 @@ export class EditpostComponent implements OnInit {
     this.editPostForm.get('CrId').disable();
 
     if (this.editMode == true) {
-      this.crLabel = (localStorage.getItem("ProjectId"));
+      this.crLabel = (localStorage.getItem("projectId"));
       this.crLabel = this.crLabel+'-'+ this.id;
      
  
