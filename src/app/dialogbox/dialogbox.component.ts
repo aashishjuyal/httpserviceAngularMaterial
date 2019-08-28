@@ -39,7 +39,7 @@ export class DialogBox {
   downloadFile(DocumentNameWithGuid,Id){
     this.service.downloadFile(DocumentNameWithGuid,Id)
     .subscribe(response => {
-      downloadFile1(response);
+     this.downloadFile1(response);
     });
   }
   downloadFile1(t) {

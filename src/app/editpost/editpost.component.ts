@@ -63,7 +63,7 @@ export class EditpostComponent implements OnInit {
     this.editPostForm = new FormGroup({
       'CrId': new FormControl(''),
       'CrEditId': new FormControl(''),
-      'desc': new FormControl('', [Validators.required]),
+      'desc': new FormControl('', [Validators.required,Validators.maxLength(250)]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
       'effort': new FormControl(''),
