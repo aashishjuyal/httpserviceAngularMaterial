@@ -66,8 +66,12 @@ export class PostService {
   }
 
 
-  downloadFile(DocumentNameWithGuid,Id):Observable<HttpResponse<Blob>>{
-    return this.http.get<HttpResponse<Blob>>(this.compunnalapi + 'DownloadFileFromAws?id='+Id+'&fileName='+DocumentNameWithGuid);
+  downloadFile(DocumentNameWithGuid,Id){
+    return this.http.get(this.compunnalapi + 'DownloadFileFromAws?id='+Id+'&fileName='+DocumentNameWithGuid,{
+      responseType: "blob",
+      observe: "response",
+      reportProgress: !0
+  });
   }
   // Get all Posts data
   getPostsList(): Observable<ResponseFormat> {
