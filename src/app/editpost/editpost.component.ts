@@ -7,13 +7,10 @@ import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { CustomFilePickerAdapter } from './../custom-file-picker.adapter';
 import { ResponseFormat } from '../models/responseFormat';
-//import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-//import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogBox } from '../dialogbox/dialogbox.component';
-//import { ConsoleReporter } from 'jasmine';
 
 const moment = _rollupMoment || _moment;
 
@@ -207,9 +204,60 @@ export class EditpostComponent implements OnInit {
       this.files.push(element);
     }
   }
-  deleteAttachment(index) {
-    this.files.splice(index, 1)
+  deleteAttachment(data) {
+    const dialogRef = this.dialog.open(DialogBox, {
+      width: '500px !important',
+      data: {isConfirm: true,action:"deleteCR",crid:data.crId}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != undefined){
+        if(result.event == "yes"){
+          this.deleteOk(data);
+        }else{
+          if(result.event == "no"){
+            this.deleteCancelled();
+          }
+        }
+      }
+    });
   }
+  deleteOk(data){
+    if(data.docId != undefined){
+        this.service.deleteFile(data.fileName,data.docId).subscribe(response => {
+          //response.Success = true;
+          if(response.Success == true){
+            this.showDeleteSuccess(data);
+          }else{
+            const dialogRef = this.dialog.open(DialogBox, {
+              width: '32em !important',
+              data: {isError: true,action:"errorCR",actionMessage:"added"}
+            });
+            dialogRef.afterClosed().subscribe(result => {
+            });
+          }
+        });
+    }else{
+      this.showDeleteSuccess(data);
+    }
+  }
+  showDeleteSuccess(data){
+    const dialogRef = this.dialog.open(DialogBox, {
+      width: '32em !important',
+      data: {isSuccess: true,action:"successCR",actionMessage:"added"}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.files.splice(data.index, 1);
+    });
+  }
+  deleteCancelled(): void {
+    const dialogRef = this.dialog.open(DialogBox, {
+      width: '500px !important',
+      data: {isCancelled: true,action:"cancelledCR"}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+}
+
   hasError = (controlName: string, errorName: string) =>{
     return this.editPostForm.controls[controlName].hasError(errorName);
   }

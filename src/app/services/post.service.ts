@@ -120,5 +120,10 @@ export class PostService {
       .delete<ResponseFormat>(this.compunnalapi + 'ChangeRequest/' + id, this.httpOptions)
       .pipe(catchError(this.handleError))
   }
+  deleteFile(DocumentNameWithGuid,Id):Observable<ResponseFormat>{
+      return this.http
+        .delete<ResponseFormat>(this.compunnalapi + 'ChangeRequest/Document/'+Id+'?fileName='+DocumentNameWithGuid, this.httpOptions)
+        .pipe(catchError(this.handleError));
+  }
 
 }
