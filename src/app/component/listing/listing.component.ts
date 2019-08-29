@@ -55,6 +55,13 @@ export class ListingComponent implements OnInit,AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  
+  clearFilter(){
+    this.dataSource.filter = "";
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   ngOnInit() {
     localStorage.setItem("projectId","2003");
     this.getAllPosts();
