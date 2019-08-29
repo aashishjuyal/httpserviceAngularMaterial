@@ -19,7 +19,8 @@
             }
             
             .right-section>* textarea {
-                padding-top: 70px;
+                min-height: 82px;
+                padding-top: 15px;
             }
             
             .left-section>* {
@@ -51,6 +52,7 @@
             .raisedby label {
                 padding-left: 0px;
                 display: inline-block;
+                padding-top: 5px;
             }
             
             .mat-icons-input {
@@ -60,6 +62,7 @@
             .input-boxes {
                 width: 45%;
                 float: left;
+                padding-top: 17px;
             }
             
             .mat-icon-input {
@@ -103,6 +106,7 @@
             
             .left-section .upload-area {
                 width: 92%;
+                padding-top: 8px;
             }
             
             .upload-area .upload-icon {
