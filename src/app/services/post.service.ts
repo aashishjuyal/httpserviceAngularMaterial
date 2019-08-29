@@ -51,14 +51,14 @@ export class PostService {
 
 
   private approvedStatus : Observable<ResponseFormat> = this.http.get<ResponseFormat>(this.compunnalapi + 'GetApprovedStatus').pipe(
-    publishReplay(3), 
+    publishReplay(3),
     refCount()
   );
   getApprovedStatus(){
     return this.approvedStatus;
   }
   private raisedBy : Observable<ResponseFormat> = this.http.get<ResponseFormat>(this.compunnalapi + 'GetRaiseBy').pipe(
-    publishReplay(3), 
+    publishReplay(3),
     refCount()
   );
   getRaisedBy() {
@@ -105,9 +105,9 @@ export class PostService {
 
 
   // Update post by id
-  updatePost(id, post): Observable<Post> {
+  updatePost(id, post): Observable<ResponseFormat> {
     return this.http
-      .put<Post>(this.compunnalapi + 'ChangeRequest/' + id, post)
+      .put<ResponseFormat>(this.compunnalapi + 'ChangeRequest/' + id, post)
       .pipe(
       catchError(this.handleError)
       )

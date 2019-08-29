@@ -83,13 +83,11 @@ export class ListingComponent implements OnInit,AfterViewInit {
     };
 
   }
- 
+
   getAllPosts() {
     this.service.getPostsList()
       .subscribe(response => {
         this.dataSource.data = response.Content.Result as Post[];
-        //this.dataSource = new MatTableDataSource<Post>(response.Content.Result);
-
         this.loading = false;
       })
 
