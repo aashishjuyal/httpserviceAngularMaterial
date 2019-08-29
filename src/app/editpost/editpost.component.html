@@ -75,7 +75,7 @@
                     <div class="uploaded-section" *ngFor="let file of files;let i=index">
 
                         <p>{{ files[i].name }}</p>
-                        <button class="delete-file" (click)="deleteAttachment(i)">
+                        <button class="delete-file" (click)="deleteAttachment({index:i,crId:files[i].CrId,docId:files[i].Id,fileName:files[i].DocumentNameWithGuid})">
                            <mat-icon>delete</mat-icon>
                         </button>
                     </div>
