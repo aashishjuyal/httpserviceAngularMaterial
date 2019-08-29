@@ -67,7 +67,7 @@
     <!-- Raised On Column -->
     <ng-container matColumnDef="RaisedOn">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> RAISED ON </th>
-        <td mat-cell *matCellDef="let element"> {{formatDate(element.RaisedOn)}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.RaisedOn|date:'d MMM yyy'}} </td>
     </ng-container>
 
     <!-- Effort Column -->
