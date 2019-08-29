@@ -83,6 +83,7 @@ export class ListingComponent implements OnInit,AfterViewInit {
     };
 
   }
+ 
   getAllPosts() {
     this.service.getPostsList()
       .subscribe(response => {

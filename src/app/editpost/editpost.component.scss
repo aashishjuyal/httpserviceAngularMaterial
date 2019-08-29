@@ -170,8 +170,9 @@
                 cursor: pointer;
             }
             
-            .uploaded-section .delete-file img {
+            .uploaded-section .delete-file mat-icon {
                 width: 30px;
+                color: #2C68EA;
             }
             
             .attach-file {
