@@ -68,15 +68,15 @@
                 </div>
                 <p><i>Available Formats: DOC,PDF,XLS,CSV,ZIP. Size must be less than 25 MB.</i></p>
 
-                <div class="files-list" *ngFor="let file of files;let i=index">
+                <div class="files-list">
                     <p class="file-desc">File Name <span>Action</span>
                     </p>
 
-                    <div class="uploaded-section">
+                    <div class="uploaded-section" *ngFor="let file of files;let i=index">
 
                         <p>{{ files[i].name }}</p>
                         <button class="delete-file">
-                           <mat-icon>more_vert</mat-icon> 
+                           <mat-icon>more_vert</mat-icon>
                         </button>
                     </div>
                 </div>

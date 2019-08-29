@@ -76,7 +76,7 @@ export class EditpostComponent implements OnInit {
       'SharedWithCustomerOn': new FormControl('')
     })
     this.editPostForm.get('ProjectId').setValue(localStorage.getItem("projectId"));
-  
+
     this.editPostForm.get('status').setValue(1001);
     this.editPostForm.get('raisedby').setValue(2002);
     this.editPostForm.get('CrEditId').setValue(0);
@@ -88,15 +88,16 @@ export class EditpostComponent implements OnInit {
     if (this.editMode == true) {
       this.crLabel = (localStorage.getItem("projectId"));
       this.crLabel = this.crLabel+'-'+ this.id;
-     
- 
+
+
       this.service.getPost(this.id).subscribe(responseData => {
         this.post = responseData;
         this.statusVal = this.post.Content.Result.ApprovalStatus;
         this.RaisedByVal = this.post.Content.Result.RaisedBy;
         for (let index = 0; index < this.post.Content.Result.Documents.length; index++) {
           const element = this.post.Content.Result.Documents[index];
-          this.files.push(element.DocumentName)
+          element.name = element.DocumentName;
+          this.files.push(element)
         }
         this.editPostForm.setValue({
           'CrId': this.post.Content.Result.ProjectId+'-'+this.post.Content.Result.CrId,
@@ -133,11 +134,11 @@ export class EditpostComponent implements OnInit {
       ApprovalStatus:this.editPostForm.value.status,
       Comments:this.editPostForm.value.Comments
     }
-    let formData: FormData = new FormData(); 
-    formData.append('json', JSON.stringify(post)); 
+    let formData: FormData = new FormData();
+    formData.append('json', JSON.stringify(post));
     for (let index = 0; index < this.files.length; index++) {
       const element = this.files[index];
-      formData.append('file', element); 
+      formData.append('file', element);
     }
     if (this.editMode) {
       this.updatePost(post.CrId, formData)
@@ -184,7 +185,7 @@ export class EditpostComponent implements OnInit {
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
       this.files.push(element);
-    }  
+    }
   }
   deleteAttachment(index) {
     this.files.splice(index, 1)
