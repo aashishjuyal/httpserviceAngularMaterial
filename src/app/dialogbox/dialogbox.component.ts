@@ -5,13 +5,6 @@ import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PostService } from '../services/post.service';
 
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',

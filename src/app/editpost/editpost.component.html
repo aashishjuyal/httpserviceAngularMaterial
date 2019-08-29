@@ -68,7 +68,7 @@
                 </div>
                 <p><i>Available Formats: DOC,PDF,XLS,CSV,ZIP. Size must be less than 25 MB.</i></p>
 
-                <div class="files-list">
+                <div *ngIf="files.length" class="files-list">
                     <p class="file-desc">File Name <span>Action</span>
                     </p>
 

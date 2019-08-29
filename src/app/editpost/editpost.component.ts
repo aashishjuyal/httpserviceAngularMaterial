@@ -7,11 +7,11 @@ import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { CustomFilePickerAdapter } from './../custom-file-picker.adapter';
 import { ResponseFormat } from '../models/responseFormat';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+//import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+//import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { DialogBox } from '../dialogbox/dialogbox.component';
 //import { ConsoleReporter } from 'jasmine';
 
@@ -75,18 +75,11 @@ export class EditpostComponent implements OnInit {
       'ProjectId': new FormControl(''),
       'SharedWithCustomerOn': new FormControl('')
     })
-    this.editPostForm.get('ProjectId').setValue(localStorage.getItem("projectId"));
-
-    this.editPostForm.get('status').setValue(1001);
-    this.editPostForm.get('raisedby').setValue(2002);
-    this.editPostForm.get('CrEditId').setValue(0);
-    this.editPostForm.get('effort').setValue(0);
-    this.editPostForm.get('total').setValue(0);
-    this.editPostForm.get('CrId').setValue(localStorage.getItem("projectId"));
-    this.editPostForm.get('CrId').disable();
+    let projectIdFromStorage = localStorage.getItem("projectId");
+    this.setFormDefaultValues(projectIdFromStorage);
 
     if (this.editMode == true) {
-      this.crLabel = (localStorage.getItem("projectId"));
+      this.crLabel = projectIdFromStorage;
       this.crLabel = this.crLabel+'-'+ this.id;
 
 
@@ -117,7 +110,16 @@ export class EditpostComponent implements OnInit {
       })
     }
   }
-
+  setFormDefaultValues(projectIdFromStorage){
+    this.editPostForm.get('ProjectId').setValue(projectIdFromStorage);
+    this.editPostForm.get('status').setValue(1001);
+    this.editPostForm.get('raisedby').setValue(2002);
+    this.editPostForm.get('CrEditId').setValue(0);
+    this.editPostForm.get('effort').setValue(0);
+    this.editPostForm.get('total').setValue(0);
+    this.editPostForm.get('CrId').setValue(projectIdFromStorage);
+    this.editPostForm.get('CrId').disable();
+  }
   onSubmit() {
     if(this.editPostForm.status == "INVALID"){
       return true;
@@ -158,26 +160,44 @@ export class EditpostComponent implements OnInit {
   updatePost(postId, post) {
     this.service.updatePost(postId, post)
       .subscribe(response => {
-        const dialogRef = this.dialog.open(DialogBox, {
-          width: '32em !important',
-          data: {isSuccess: true,action:"successCR",actionMessage:"updated"}
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.router.navigate(['/']);
-        });
+        if(response.Success == true){
+            const dialogRef = this.dialog.open(DialogBox, {
+              width: '32em !important',
+              data: {isSuccess: true,action:"successCR",actionMessage:"updated"}
+            });
+            dialogRef.afterClosed().subscribe(result => {
+              this.router.navigate(['/']);
+            });
+        }else{
+          const dialogRef = this.dialog.open(DialogBox, {
+            width: '32em !important',
+            data: {isError: true,action:"errorCR",actionMessage:"added"}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+          });
+        }
       })
   }
 
   createPost(post) {
     this.service.createPost(post)
       .subscribe(response => {
-        const dialogRef = this.dialog.open(DialogBox, {
-          width: '32em !important',
-          data: {isSuccess: true,action:"successCR",actionMessage:"added"}
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.router.navigate(['/']);
-        });
+        if(response.Success == true){
+          const dialogRef = this.dialog.open(DialogBox, {
+            width: '32em !important',
+            data: {isSuccess: true,action:"successCR",actionMessage:"added"}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            this.router.navigate(['/']);
+          });
+        }else{
+          const dialogRef = this.dialog.open(DialogBox, {
+            width: '32em !important',
+            data: {isError: true,action:"errorCR",actionMessage:"added"}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+          });
+        }
       })
   }
 
