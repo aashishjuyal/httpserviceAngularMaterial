@@ -1,24 +1,24 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <h2>Change Request List</h2>
-  <div class="tools">
-      <button mat-mini-fab color="basic">
+    <h2>Change Request List</h2>
+    <div class="tools">
+        <button mat-mini-fab color="basic">
       <mat-icon>save_alt</mat-icon>
     </button>
-      <button mat-mini-fab class="primary-button" color="primary" [matMenuTriggerFor]="filter">
+        <button mat-mini-fab class="primary-button" color="primary" [matMenuTriggerFor]="filter">
       <mat-icon>filter_list</mat-icon>
     </button>
-      <mat-menu #filter="matMenu">
-          <button (click)="clearFilter()" class="clear-Filter mat-menu-item">
+        <mat-menu #filter="matMenu">
+            <button (click)="clearFilter()" class="clear-Filter mat-menu-item">
             <span>Clear Filter</span>
           </button>
-          <button *ngFor="let StatusList of StatusList" (click)="doFilter(StatusList.ApprovedStatusId)" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
+            <button *ngFor="let StatusList of StatusList" (click)="doFilter(StatusList.ApprovedStatusId)" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
           <mat-icon>trip_origin</mat-icon>
           <span>{{StatusList.ApprovedStatusName}}</span>
       </button>
 
-      </mat-menu>
+        </mat-menu>
 
-  </div>
+    </div>
 
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortStart="desc">
@@ -67,7 +67,7 @@
     <!-- Raised On Column -->
     <ng-container matColumnDef="RaisedOn">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> RAISED ON </th>
-        <td mat-cell *matCellDef="let element"> {{formatDate(element.RaisedOn)}} </td>
+        <td mat-cell *matCellDef="let element"> {{(element.RaisedOn | date:'dd-MM-yyyy')}} </td>
     </ng-container>
 
     <!-- Effort Column -->

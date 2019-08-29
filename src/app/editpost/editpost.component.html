@@ -126,7 +126,7 @@
 
         <br/>
 
-        <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn">Save</button>
+        <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn" [disabled]="editPostForm.invalid">Save</button>
         <button *ngIf="editMode" type="submit" (click)="onSubmit()">Cancel</button>
     </form>
 

@@ -84,13 +84,7 @@ export class ListingComponent implements OnInit,AfterViewInit {
     };
 
   }
-  formatDate(dateVal){
-    if(dateVal){
-      return moment(dateVal).format('YYYY-MM-DD');
-    }else{
-      return "";
-    }
-  }
+ 
   getAllPosts() {
     this.service.getPostsList()
       .subscribe(response => {
