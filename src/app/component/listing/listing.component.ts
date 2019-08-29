@@ -7,7 +7,6 @@ import { PostService } from '../../services/post.service';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogBox } from '../../dialogbox/dialogbox.component';
-import * as moment from 'moment';
 
 
 @Component({
