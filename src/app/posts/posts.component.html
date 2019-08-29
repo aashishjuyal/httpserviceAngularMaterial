@@ -1,25 +1,3 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-    <h2>Change Request List</h2>
-    <div class="tools">
-        <button mat-mini-fab color="basic">
-        <mat-icon>save_alt</mat-icon>
-      </button>
-        <button mat-mini-fab class="primary-button" color="primary" [matMenuTriggerFor]="filter">
-        <mat-icon>filter_list</mat-icon>
-      </button>
-        <mat-menu #filter="matMenu">
-
-            <button *ngFor="let StatusList of StatusList" (click)="doFilter(StatusList.ApprovedStatusId)" class="{{StatusList.ApprovedStatusName | lowercase | removewhitespaces}} mat-menu-item">
-            <mat-icon>trip_origin</mat-icon>
-           
-            <span>{{StatusList.ApprovedStatusName}}</span>
-        </button>
-
-        </mat-menu>
-
-    </div>
-
-</div>
 <app-listing></app-listing>
 <div fxLayout="row" fxLayoutAlign="end center" class="gc-margin-top-20 add-post">
     <button mat-raised-button color="" (click)="nvaigateToAdd()">

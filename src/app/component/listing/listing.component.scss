@@ -51,3 +51,31 @@ table {
 .attachment-data {
     vertical-align: super;
 }
+
+.primary-button {
+  background-color: #2C68EA;
+}
+
+button {
+  &.approved {
+      mat-icon {
+          color: #077e3a;
+      }
+  }
+  &.pending {
+      mat-icon {
+          color: #f9aa01;
+      }
+  }
+  &.notapproved {
+      mat-icon {
+          color: #ff0000;
+      }
+  }
+}
+
+.tools {
+  button {
+      margin: 10px 0 10px 10px;
+  }
+}
