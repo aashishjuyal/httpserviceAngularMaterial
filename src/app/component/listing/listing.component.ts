@@ -7,6 +7,7 @@ import { PostService } from '../../services/post.service';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogBox } from '../../dialogbox/dialogbox.component';
+import * as moment from 'moment';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class ListingComponent implements OnInit,AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   clearFilter(){
     this.dataSource.filter = "";
     if (this.dataSource.paginator) {
@@ -83,7 +84,13 @@ export class ListingComponent implements OnInit,AfterViewInit {
     };
 
   }
-
+  formatDate(dateVal){
+    if(dateVal){
+      return moment(dateVal).format('YYYY-MM-DD');
+    }else{
+      return "";
+    }
+  }
   getAllPosts() {
     this.service.getPostsList()
       .subscribe(response => {
