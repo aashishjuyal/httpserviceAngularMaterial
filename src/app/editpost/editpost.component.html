@@ -115,9 +115,9 @@
         <br/>
         <div class="form-btns">
             <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn" [disabled]="editPostForm.invalid">Save</button>
-            <button *ngIf="!editMode" type="submit" class="form-cancel-btn">Cancel</button>
-            <button *ngIf="editMode" type="submit" (click)="onSubmit()" class="form-submit-btn">Save</button>
-            <button *ngIf="editMode" type="submit" (click)="onSubmit()" class="form-cancel-btn">Cancel</button>
+            <button *ngIf="!editMode" type="submit" (click)="cancelPost()" class="form-cancel-btn">Cancel</button>
+            <button *ngIf="editMode" type="submit" (click)="onSubmit()" class="form-submit-btn" [disabled]="editPostForm.invalid">Save</button>
+            <button *ngIf="editMode" type="submit" (click)="cancelPost()" class="form-cancel-btn">Cancel</button>
         </div>
     </form>
     <div *ngIf="isAdded">{{confermationStr}}</div>

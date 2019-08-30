@@ -176,6 +176,9 @@ export class EditpostComponent implements OnInit {
       })
   }
 
+  cancelPost() {
+    this.router.navigate(['/']);
+  }
   createPost(post) {
     this.service.createPost(post)
       .subscribe(response => {
