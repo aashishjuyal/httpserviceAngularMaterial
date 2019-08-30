@@ -37,7 +37,7 @@ export class EditpostComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
-    public dialog: MatDialog) {
+    private dialog: MatDialog) {
     this.post = new ResponseFormat();
   }
 

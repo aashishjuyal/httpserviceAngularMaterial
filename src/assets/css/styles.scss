@@ -42,7 +42,7 @@ html {
 
 .popup {
     text-align: center;
-    width: 400px;
+    max-width: 400px;
 }
 
 .popup h1 {
@@ -80,9 +80,10 @@ html {
     border: .25em solid #9de0f6;
     color: #3fc3ee;
 }
+
 .error-icon {
-  border: .25em solid #b42727;
-  color: #b42727;
+    border: .25em solid #b42727;
+    color: #b42727;
 }
 
 .delete-icon {

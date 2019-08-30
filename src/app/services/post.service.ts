@@ -10,7 +10,6 @@ import { ResponseFormat } from '../models/responseFormat';
   providedIn: 'root'
 })
 export class PostService {
-  private dataUrl: string = 'http://localhost:3000/posts';
   private compunnalapi: string = 'http://inspirecrqa.compunnel.com/api/';
 
   constructor(private http: HttpClient) { }

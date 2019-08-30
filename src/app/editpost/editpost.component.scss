@@ -1,207 +1,239 @@
-            .form-container {
-                width: 100%;
-                background-color: #fff;
-                font-size: 12px;
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                padding-top: 15px;
-            }
-            
-            .left-section,
-            .right-section {
-                width: 50%;
-                float: left;
-            }
-            
-            .descrip {
-                width: 93%;
-            }
-            
-            .right-section>* textarea {
-                min-height: 90px;
-                padding-top: 5px;
-            }
-            
-            .left-section>* {
-                padding-left: 20px;
-                width: 45%;
-            }
-            
-            .right-section>* {
-                padding-left: 20px;
-            }
-            
-            .left-section>* label,
-            .right-section>* label {
-                color: #3B71ED;
-                font-size: 14px;
-            }
-            
-            .left-section>* input,
-            .right-section>* input,
-            .input-boxes input {
-                padding-top: 15px;
-            }
-            
-            .datepicker-icon {
-                margin-top: 40px;
-                font-size: 20px;
-            }
-            
-            .raisedby label {
-                padding-left: 10px;
-                display: inline-block;
-                padding-top: 5px;
-            }
-            
-            .mat-icons-input {
-                padding-top: 20px;
-            }
-            
-            .input-boxes {
-                width: 45%;
-                float: left;
-                padding-top: 17px;
-            }
-            
-            .mat-icon-input {
-                position: absolute;
-                right: 2px;
-                top: 7px;
-                font-size: 20px;
-            }
-            
-            .select-input {
-                margin-top: 14px;
-            }
-            
-            .mat-radio-group>* {
-                padding-left: 20px;
-                width: 43%;
-                padding-top: 20px;
-            }
-            
-            .back-icon {
-                margin-right: 10px;
-                vertical-align: sub;
-                color: #676A73;
-            }
-            
-            .btn-blue-bg {
-                background-color: #2D6FE9;
-            }
-            
-            //file uplodae
-            .uploadfilecontainer {
-                background-repeat: no-repeat;
-                background-size: 100px;
-                background-position: center;
-                height: 90px;
-                width: 100%;
-                margin: 20px auto;
-                border: 2px dashed #1C8ADB;
-                border-radius: 10px;
-            }
-            
-            .left-section .upload-area {
-                width: 92%;
-                padding-top: 8px;
-            }
-            
-            .upload-area .upload-icon {
-                color: #D8E3F7;
-                font-size: 55px;
-                position: relative;
-                margin-top: 5px;
-            }
-            
-            .uploadfilecontainer:hover {
-                cursor: pointer;
-                background-color: #9ecbec !important;
-                opacity: 0.8;
-            }
-            
-            .uploadfilecontainer {
-                background-color: #FAFBFF !important;
-                text-align: center;
-                margin-bottom: 5px;
-            }
-            
-            .uploadfilecontainer p {
-                margin-top: 0px;
-            }
-            
-            .upload-inner {
-                width: 33%;
-                display: inline-block;
-                color: #A4A5AA;
-                font-size: 16px;
-            }
-            
-            .fileUpload {
-                position: relative;
-                overflow: hidden;
-                margin: 10px;
-            }
-            
-            .fileUpload input.upload {
-                position: absolute;
-                top: 0;
-                right: 0;
-                margin: 0;
-                padding: 0;
-                font-size: 20px;
-                cursor: pointer;
-                opacity: 0;
-                filter: alpha(opacity=0);
-            }
-            
-            .uploaded-section {
-                display: flex;
-                justify-content: space-between;
-                width: 97%;
-                margin: 10px auto;
-                background: #ffffff;
-                border: 1px solid;
-                padding: 5px;
-                color: #1c8adb;
-            }
-            
-            .uploaded-section .delete-file {
-                background: transparent;
-                border: none;
-                cursor: pointer;
-            }
-            
-            .uploaded-section .delete-file mat-icon {
-                width: 30px;
-                color: #2C68EA;
-            }
-            
-            .attach-file {
-                border-radius: 18px;
-                background-color: #5A6277;
-                color: #fff;
-                padding: 5px 15px 7px 15px;
-                font-size: 14px;
-            }
-            
-            .upload-doc span {
-                font-size: 14px;
-                display: table-cell;
-                padding-left: 40px;
-            }
-            
-            .file-desc {
-                font-size: 14px;
-                font-weight: bold;
-            }
-            
-            .file-desc span {
-                float: right;
-            }
-            
-            .left-section mat-icon {
-                color: #C3D2F3;
-            }
+    .form-container {
+        width: 100%;
+        background-color: #fff;
+        font-size: 12px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding-top: 15px;
+    }
+    
+    .left-section,
+    .right-section {
+        width: 50%;
+        float: left;
+    }
+    
+    .descrip {
+        width: 93%;
+    }
+    
+    .right-section>* textarea {
+        min-height: 85px;
+        padding-top: 10px;
+        font-size: 14px;
+    }
+    
+    .left-section>* {
+        padding-left: 20px;
+        width: 45%;
+    }
+    
+    .right-section>* {
+        padding-left: 20px;
+    }
+    
+    .left-section>* label,
+    .right-section>* label {
+        color: #3B71ED;
+        font-size: 14px;
+    }
+    
+    .left-section>* input,
+    .right-section>* input,
+    .input-boxes input {
+        padding-top: 15px;
+    }
+    
+    .datepicker-icon {
+        margin-top: 40px;
+        font-size: 20px;
+    }
+    
+    .raisedby label {
+        padding-left: 10px;
+        display: inline-block;
+        padding-top: 5px;
+    }
+    
+    .mat-icons-input {
+        padding-top: 20px;
+    }
+    
+    .input-boxes {
+        width: 45%;
+        float: left;
+        padding-top: 17px;
+    }
+    
+    .mat-icon-input {
+        position: absolute;
+        right: 2px;
+        top: 7px;
+        font-size: 20px;
+    }
+    
+    .select-input {
+        margin-top: 14px;
+    }
+    
+    .mat-radio-group>* {
+        padding-left: 20px;
+        width: 43%;
+        padding-top: 20px;
+    }
+    
+    .back-icon {
+        margin-right: 10px;
+        vertical-align: sub;
+        color: #676A73;
+    }
+    
+    .btn-blue-bg {
+        background-color: #2D6FE9;
+    }
+    
+    //file uplodae
+    .uploadfilecontainer {
+        background-repeat: no-repeat;
+        background-size: 100px;
+        background-position: center;
+        height: 90px;
+        width: 100%;
+        margin: 20px auto;
+        border: 2px dashed #1C8ADB;
+        border-radius: 10px;
+    }
+    
+    .left-section .upload-area {
+        width: 92%;
+        padding-top: 8px;
+    }
+    
+    .upload-area .upload-icon {
+        color: #D8E3F7;
+        font-size: 55px;
+        position: relative;
+        margin-top: 5px;
+    }
+    
+    .uploadfilecontainer:hover {
+        cursor: pointer;
+        background-color: #9ecbec !important;
+        opacity: 0.8;
+    }
+    
+    .uploadfilecontainer {
+        background-color: #FAFBFF !important;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .uploadfilecontainer p {
+        margin-top: 0px;
+    }
+    
+    .upload-inner {
+        width: 33%;
+        display: inline-block;
+        color: #A4A5AA;
+        font-size: 16px;
+    }
+    
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+    
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    
+    .uploaded-section {
+        display: flex;
+        justify-content: space-between;
+        width: 97%;
+        margin: 10px auto;
+        background: #ffffff;
+        border: 1px solid;
+        padding: 5px;
+        color: #1c8adb;
+    }
+    
+    .uploaded-section .delete-file {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .uploaded-section .delete-file mat-icon {
+        width: 30px;
+        color: #2C68EA;
+    }
+    
+    .attach-file {
+        border-radius: 18px;
+        background-color: #5A6277;
+        color: #fff;
+        padding: 5px 15px 7px 15px;
+        font-size: 14px;
+    }
+    
+    .upload-doc span {
+        font-size: 14px;
+        display: table-cell;
+        padding-left: 40px;
+    }
+    
+    .file-desc {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .file-desc span {
+        float: right;
+    }
+    
+    .left-section mat-icon {
+        color: #C3D2F3;
+    }
+    
+    .form-btns {
+        width: 100%;
+        display: flex;
+        margin: 20px;
+    }
+    
+    .form-submit-btn {
+        border-radius: 5px;
+        background-color: #3085d6;
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        padding: 5px 12px 5px 12px;
+    }
+    
+    .form-submit-btn:disabled {
+        color: rgba(0, 0, 0, .26);
+        background-color: rgba(0, 0, 0, .12);
+    }
+    
+    .form-cancel-btn {
+        color: #000;
+        background-color: rgba(0, 0, 0, .12);
+        margin-left: 15px;
+        font-size: 16px;
+        padding: 5px 12px 5px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }

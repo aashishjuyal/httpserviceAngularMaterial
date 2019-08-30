@@ -1,21 +1,17 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-
     <h2>
         <a routerLink="/">
             <mat-icon class="back-icon"> keyboard_backspace </mat-icon>
         </a>
         <span *ngIf="!editMode">Create New Change Request
-            </span>
-        <span *ngIf="editMode">Change Request Detail: {{crLabel}}</span></h2>
+       </span>
+        <span *ngIf="editMode">Change Request Detail: {{crLabel}}</span>
+    </h2>
     <div class="tools">
-
         <button mat-mini-fab color="primary" class="btn-blue-bg">
-                <mat-icon> add </mat-icon>
-              </button>
-
-
+          <mat-icon> add </mat-icon>
+       </button>
     </div>
-
 </div>
 <div class="form-container">
     <form [formGroup]="editPostForm">
@@ -32,7 +28,7 @@
                 <mat-datepicker-toggle matSuffix [for]="picker" class="mat-icon-input"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['RaisedOn'].hasError('required') &&
-              editPostForm.controls['RaisedOn'].touched">
+                editPostForm.controls['RaisedOn'].touched">
                     Select raised on date.
                 </mat-error>
             </mat-form-field>
@@ -42,60 +38,51 @@
             </mat-radio-group>
             <mat-form-field appearance="legacy" class="mat-icons-input">
                 <label>Effort</label>
-                <input matInput placeholder="" formControlName="effort" type="number">
+                <input matInput placeholder="" maxlength="5" formControlName="effort" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
-
-
             </mat-form-field>
             <mat-form-field appearance="legacy" class="mat-icons-input">
                 <label>Total</label>
-                <input matInput placeholder="" formControlName="total" type="number">
+                <input matInput placeholder="" maxlength="10" formControlName="total" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>monetization_on</mat-icon>
                 <mat-hint></mat-hint>
             </mat-form-field>
-
             <div appearance="legacy" class="mat-icons-input upload-area">
                 <label>CR Document</label>
                 <div class="uploadfilecontainer flex-container" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
                     <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
                     <div class="upload-inner upload-doc">
-                        <mat-icon class="upload-icon">cloud_upload</mat-icon><br>
+                        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+                        <br>
                         <span>Drag and drop a file here</span>
                     </div>
                     <div class="upload-inner">OR</div>
                     <div class="upload-inner"><span class="attach-file">choose file</span></div>
-
                 </div>
                 <p><i>Available Formats: DOC,PDF,XLS,CSV,ZIP. Size must be less than 25 MB.</i></p>
-
                 <div *ngIf="files.length" class="files-list">
                     <p class="file-desc">File Name <span>Action</span>
                     </p>
-
                     <div class="uploaded-section" *ngFor="let file of files;let i=index">
-
                         <p>{{ files[i].name }}</p>
                         <button class="delete-file" (click)="deleteAttachment({index:i,crId:files[i].CrId,docId:files[i].Id,fileName:files[i].DocumentNameWithGuid})">
-                           <mat-icon>delete</mat-icon>
-                        </button>
+                   <mat-icon>delete</mat-icon>
+                </button>
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="right-section">
             <mat-form-field class="descrip">
                 <label>Description*</label>
                 <textarea matInput placeholder="" maxlength="255" class="textarea" formControlName="desc" #message matInput required></textarea>
-
                 <mat-hint align="start">
                     <strong>Max 255 characters
-                        </strong>
+ </strong>
                 </mat-hint>
                 <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                 <mat-error *ngIf="editPostForm.controls['desc'].hasError('required') &&
-                      editPostForm.controls['desc'].touched">
+    editPostForm.controls['desc'].touched">
                     Description is
                     <strong>required</strong>
                 </mat-error>
@@ -106,7 +93,7 @@
                 <mat-datepicker-toggle matSuffix [for]="picker1" class="mat-icon-input"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['SharedWithCustomerOn'].hasError('required') &&
-                editPostForm.controls['SharedWithCustomerOn'].touched">
+    editPostForm.controls['SharedWithCustomerOn'].touched">
                     Select raised on date.
                 </mat-error>
             </mat-form-field>
@@ -114,31 +101,23 @@
                 <label>Status</label>
                 <mat-select formControlName="status" [(value)]="statusVal" placeholder="" class="select-input">
                     <mat-option *ngFor="let StatusList of StatusList" [value]="StatusList.ApprovedStatusId">{{StatusList.ApprovedStatusName}}</mat-option>
-
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="descrip">
                 <label>Comment</label>
-                <textarea matInput placeholder="" formControlName="Comments"></textarea>
+                <textarea matInput placeholder="" maxlength="255" formControlName="Comments"></textarea>
                 <mat-hint align="start">
                     <strong>Max 255 characters
-                        </strong>
+ </strong>
                 </mat-hint>
-                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
             </mat-form-field>
-
-
-
         </div>
-
-
-
         <br/>
-
-        <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn" [disabled]="editPostForm.invalid">Save</button>
-        <button *ngIf="editMode" type="submit" (click)="onSubmit()">Cancel</button>
+        <div class="form-btns">
+            <button *ngIf="!editMode" type="submit" (click)="onSubmit()" class="form-submit-btn" [disabled]="editPostForm.invalid">Save</button>
+            <button *ngIf="!editMode" type="submit" class="form-cancel-btn">Cancel</button>
+            <button *ngIf="editMode" type="submit" (click)="onSubmit()" class="dialogue-cancel">Update</button>
+        </div>
     </form>
-
     <div *ngIf="isAdded">{{confermationStr}}</div>
-
 </div>
