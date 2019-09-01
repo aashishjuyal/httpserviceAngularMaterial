@@ -40,6 +40,13 @@ export class ListingComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit(): void {
      this.dataSource.sort = this.sort;
+     this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+      if (typeof data[sortHeaderId] === 'string') {
+        return data[sortHeaderId].toLocaleLowerCase();
+      }
+
+      return data[sortHeaderId];
+    };
      this.dataSource.paginator = this.paginator;
   }
 

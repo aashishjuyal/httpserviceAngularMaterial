@@ -30,6 +30,7 @@ export class EditpostComponent implements OnInit {
   RaisedBy: any = [];
   editMode = false;
   files: any = [];
+  minDate = new Date(2019, 7, 1);
   editPostForm: FormGroup;
   adapter = new CustomFilePickerAdapter(this.http);
 
@@ -56,7 +57,7 @@ export class EditpostComponent implements OnInit {
           this.RaisedBy.push(element);
         }
       }
-    })
+    });
 
     this.editPostForm = new FormGroup({
       'CrId': new FormControl(''),
@@ -64,8 +65,8 @@ export class EditpostComponent implements OnInit {
       'desc': new FormControl('', [Validators.required,Validators.maxLength(250)]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
-      'effort': new FormControl(''),
-      'total': new FormControl(''),
+      'effort': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.minLength(1)]),
+      'total': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.minLength(1)]),
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),
@@ -116,6 +117,8 @@ export class EditpostComponent implements OnInit {
     this.editPostForm.get('total').setValue(0);
     this.editPostForm.get('CrId').setValue(projectIdFromStorage);
     this.editPostForm.get('CrId').disable();
+    this.editPostForm.get('RaisedOn').disable();
+    this.editPostForm.get('SharedWithCustomerOn').disable();
   }
   onSubmit() {
     if(this.editPostForm.status == "INVALID"){
