@@ -24,7 +24,7 @@
             </mat-form-field>
             <mat-form-field>
                 <label>Raised On*</label>
-                <input matInput formControlName="RaisedOn" [matDatepicker]="picker" [min]="minDate" placeholder="">
+                <input matInput formControlName="RaisedOn" [matDatepicker]="picker" [min]="minDate" placeholder="" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker" class="mat-icon-input"></mat-datepicker-toggle>
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['RaisedOn'].hasError('required') &&
@@ -37,16 +37,18 @@
                 <mat-radio-button *ngFor="let RaisedBy of RaisedBy" [value]="RaisedBy.RaisedById">{{RaisedBy.RaisedByName}}</mat-radio-button>
             </mat-radio-group>
             <mat-form-field appearance="legacy" class="mat-icons-input">
-                <label>Effort</label>
-                <input matInput placeholder="" maxlength="5" minlength="1" name="effort" id="effort" formControlName="effort" type="number">
+                <label>Effort*</label>
+                <input matInput placeholder="" maxlength="5" formControlName="effort" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
-                <mat-error *ngIf="editPostForm.controls['effort'].hasError('pattern')">Please select a valid value for Effort (Only Numbers).</mat-error>
-                <mat-error *ngIf="editPostForm.controls['effort'].hasError('minLength')">Effort must be either 0 or more.</mat-error>
+              <mat-error *ngIf="editPostForm.controls['effort'].hasError('required')">Effort is required.</mat-error>
+                 <mat-error *ngIf="editPostForm.controls['effort'].hasError('min')">Effort must be either 0 or more.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" class="mat-icons-input">
-                <label>Total</label>
+                <label>Total*</label>
                 <input matInput placeholder="" maxlength="10" formControlName="total" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>monetization_on</mat-icon>
+                <mat-error *ngIf="editPostForm.controls['total'].hasError('required')">Total is required.</mat-error>
+                   <mat-error *ngIf="editPostForm.controls['total'].hasError('min')">Total must be either 0 or more.</mat-error>
                 <mat-hint></mat-hint>
             </mat-form-field>
             <div appearance="legacy" class="mat-icons-input upload-area">
@@ -90,13 +92,13 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="input-boxes">
-                <label>Shared with Client</label>
-                <input matInput [matDatepicker]="picker1" placeholder="" [min]="minDate" formControlName="SharedWithCustomerOn" disabled>
+                <label>Shared with Client*</label>
+                <input matInput [matDatepicker]="picker1" readonly placeholder="" [min]="minDate" formControlName="SharedWithCustomerOn" disabled>
                 <mat-datepicker-toggle matSuffix [for]="picker1" class="mat-icon-input"></mat-datepicker-toggle>
                 <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['SharedWithCustomerOn'].hasError('required') &&
     editPostForm.controls['SharedWithCustomerOn'].touched">
-                    Select raised on date.
+    Shared with Client is required
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="input-boxes">

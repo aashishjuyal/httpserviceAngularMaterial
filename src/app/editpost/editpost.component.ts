@@ -10,15 +10,32 @@ import { ResponseFormat } from '../models/responseFormat';
 import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import {MatDialog} from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { DialogBox } from '../dialogbox/dialogbox.component';
-
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+//run npm i @angular/material-moment-adapter
 const moment = _rollupMoment || _moment;
-
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-editpost',
   templateUrl: './editpost.component.html',
-  styleUrls: ['./editpost.component.scss']
+  styleUrls: ['./editpost.component.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter},
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class EditpostComponent implements OnInit {
   crLabel: string;
@@ -30,7 +47,8 @@ export class EditpostComponent implements OnInit {
   RaisedBy: any = [];
   editMode = false;
   files: any = [];
-  minDate = new Date(2019, 7, 1);
+  todaydate = new Date();
+  minDate = moment(this.todaydate).subtract(1,"month").toDate();
   editPostForm: FormGroup;
   adapter = new CustomFilePickerAdapter(this.http);
 
@@ -65,13 +83,13 @@ export class EditpostComponent implements OnInit {
       'desc': new FormControl('', [Validators.required,Validators.maxLength(250)]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
-      'effort': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.minLength(1)]),
-      'total': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.minLength(1)]),
+      'effort': new FormControl('',[Validators.required,Validators.min(0)]),
+      'total': new FormControl('',[Validators.required,Validators.min(0)]),
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),
       'ProjectId': new FormControl(''),
-      'SharedWithCustomerOn': new FormControl('')
+      'SharedWithCustomerOn': new FormControl('',[Validators.required])
     })
     let projectIdFromStorage = localStorage.getItem("projectId");
     this.setFormDefaultValues(projectIdFromStorage);
@@ -117,8 +135,6 @@ export class EditpostComponent implements OnInit {
     this.editPostForm.get('total').setValue(0);
     this.editPostForm.get('CrId').setValue(projectIdFromStorage);
     this.editPostForm.get('CrId').disable();
-    this.editPostForm.get('RaisedOn').disable();
-    this.editPostForm.get('SharedWithCustomerOn').disable();
   }
   onSubmit() {
     if(this.editPostForm.status == "INVALID"){
