@@ -29,7 +29,7 @@
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['RaisedOn'].hasError('required') &&
                 editPostForm.controls['RaisedOn'].touched">
-                    Select raised on date.
+                    Raised on date is required.
                 </mat-error>
             </mat-form-field>
             <mat-radio-group aria-label="Raised By" formControlName="raisedby" class="raisedby" [(value)]="RaisedByVal">
@@ -87,8 +87,7 @@
                 <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                 <mat-error *ngIf="(editPostForm.controls['desc'].hasError('whitespace') || editPostForm.controls['desc'].hasError('required')) &&
     editPostForm.controls['desc'].touched">
-                    Description is
-                    <strong>required</strong>
+                    Description is required
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="input-boxes">
