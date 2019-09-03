@@ -93,7 +93,7 @@
             </mat-form-field>
             <mat-form-field class="input-boxes">
                 <label>Shared with Client*</label>
-                <input matInput [matDatepicker]="picker1" readonly placeholder="" [min]="minDate" formControlName="SharedWithCustomerOn" disabled>
+                <input matInput [matDatepicker]="picker1" readonly placeholder="" [min]="minDate" formControlName="SharedWithCustomerOn">
                 <mat-datepicker-toggle matSuffix [for]="picker1" class="mat-icon-input"></mat-datepicker-toggle>
                 <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['SharedWithCustomerOn'].hasError('required') &&
