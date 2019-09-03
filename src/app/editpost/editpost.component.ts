@@ -59,7 +59,11 @@ export class EditpostComponent implements OnInit {
     private dialog: MatDialog) {
     this.post = new ResponseFormat();
   }
-
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+  }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.editMode = this.id != null;
@@ -80,7 +84,7 @@ export class EditpostComponent implements OnInit {
     this.editPostForm = new FormGroup({
       'CrId': new FormControl(''),
       'CrEditId': new FormControl(''),
-      'desc': new FormControl('', [Validators.required,Validators.maxLength(250)]),
+      'desc': new FormControl('', [Validators.required,Validators.maxLength(250), this.noWhitespaceValidator]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
       'effort': new FormControl('',[Validators.required,Validators.min(0)]),
