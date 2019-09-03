@@ -108,7 +108,8 @@ export class EditpostComponent implements OnInit {
           element.name = element.DocumentName;
           this.files.push(element)
         }
-        this.minDate = moment(this.post.Content.Result.RaisedOn).toDate();
+        //this.minDate = moment(this.post.Content.Result.RaisedOn).toDate();
+        this.editPostForm.get("RaisedOn").clearValidators();
         this.editPostForm.setValue({
           'CrId': this.post.Content.Result.ProjectId+'-'+this.post.Content.Result.CrId,
           'CrEditId':this.post.Content.Result.CrId,
