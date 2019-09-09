@@ -257,7 +257,7 @@ export class EditpostComponent implements OnInit {
     var invalidFiles = [];
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
-      if (!this.validateFile(element.name)) {
+      if (!this.validateFile(element.name) || element.size >5000000) { //25000000
         invalidFiles.push(element.name);
       }else{
         this.files.push(element);
