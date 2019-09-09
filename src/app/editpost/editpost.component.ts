@@ -38,6 +38,7 @@ export const MY_FORMATS = {
   ],
 })
 export class EditpostComponent implements OnInit {
+  allowedExt: Array<string>;
   crLabel: string;
   id: number;
   statusVal:number;
@@ -57,12 +58,20 @@ export class EditpostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private dialog: MatDialog) {
+    this.allowedExt= ["png","jpg","jpeg","zip","pdf","xls","csv","doc","docx"];
     this.post = new ResponseFormat();
   }
   public noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
+  }
+  public noblankValidator(control: FormControl) {
+    let isValid = true;
+    if (control.value == null){
+      isValid = false;
+    }
+    return isValid ? null : { 'blankIn': true };
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params["id"];
@@ -87,8 +96,13 @@ export class EditpostComponent implements OnInit {
       'desc': new FormControl('', [Validators.required,Validators.maxLength(250), this.noWhitespaceValidator]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
+<<<<<<< HEAD
       'effort': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
       'total': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
+=======
+      'effort': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.min(0), this.noblankValidator]),
+      'total': new FormControl('',[Validators.pattern('^[0-9]*[\.]{0,1}[0-9]*$'),Validators.min(0), this.noblankValidator]),
+>>>>>>> 2c0150506cbae7d117cfed02eeab0e587bccd18e
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),
@@ -172,6 +186,9 @@ export class EditpostComponent implements OnInit {
 
     }
   }
+  nvaigateToAdd() {
+    this.router.navigate(['addPost']);
+  }
   formatDate(dateVal){
     if(dateVal){
       return moment(dateVal).format('YYYY-MM-DDTHH:mm:ss')+"Z";
@@ -225,11 +242,34 @@ export class EditpostComponent implements OnInit {
         }
       })
   }
-
+  validateFile(name: String) {
+    var ext = name.substring(name.lastIndexOf('.') + 1);
+    if (this.allowedExt.indexOf(ext.toLowerCase())>=0) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+  invalidFilePopup(fileNames : Array<String>){
+    const dialogRef = this.dialog.open(DialogBox, {
+      width: '500px !important',
+      data: {isUploadError: true,action:"deleteCR",fileData:fileNames}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
   uploadFile(event) {
+    var invalidFiles = [];
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
-      this.files.push(element);
+      if (!this.validateFile(element.name) || element.size >5000000) { //25000000
+        invalidFiles.push(element.name);
+      }else{
+        this.files.push(element);
+      }
+    }
+    if(invalidFiles.length >0){
+      this.invalidFilePopup(invalidFiles);
     }
   }
   deleteAttachment(data) {
@@ -248,6 +288,7 @@ export class EditpostComponent implements OnInit {
         }
       }
     });
+    return false;
   }
   deleteOk(data){
     if(data.docId != undefined){
