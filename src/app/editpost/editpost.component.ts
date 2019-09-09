@@ -87,8 +87,8 @@ export class EditpostComponent implements OnInit {
       'desc': new FormControl('', [Validators.required,Validators.maxLength(250), this.noWhitespaceValidator]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
-      'effort': new FormControl('',[Validators.required,Validators.min(0)]),
-      'total': new FormControl('',[Validators.required,Validators.min(0)]),
+      'effort': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
+      'total': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),
@@ -258,7 +258,7 @@ export class EditpostComponent implements OnInit {
           }else{
             const dialogRef = this.dialog.open(DialogBox, {
               width: '32em !important',
-              data: {isError: true,action:"errorCR",actionMessage:"added"}
+              data: {isError: true,action:"errorCR",actionMessage:"deleted"}
             });
             dialogRef.afterClosed().subscribe(result => {
             });
@@ -271,7 +271,7 @@ export class EditpostComponent implements OnInit {
   showDeleteSuccess(data){
     const dialogRef = this.dialog.open(DialogBox, {
       width: '32em !important',
-      data: {isSuccess: true,action:"successCR",actionMessage:"added"}
+      data: {isSuccess: true,action:"successCR",actionMessage:"deleted"}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.files.splice(data.index, 1);

@@ -40,15 +40,15 @@
                 <label>Effort*</label>
                 <input matInput placeholder="" maxlength="5" formControlName="effort" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
-              <mat-error *ngIf="editPostForm.controls['effort'].hasError('required')">Effort is required.</mat-error>
-                 <mat-error *ngIf="editPostForm.controls['effort'].hasError('min')">Effort must be either 0 or more.</mat-error>
+                <mat-error *ngIf="editPostForm.controls['effort'].hasError('min')">Effort must be either 0 or more.</mat-error>
+                <mat-error *ngIf="editPostForm.controls['effort'].hasError('minLength') || editPostForm.controls['effort'].hasError('pattern')">Effort must be either 0 or more.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" class="mat-icons-input">
                 <label>Total*</label>
                 <input matInput placeholder="" maxlength="10" formControlName="total" type="number">
                 <mat-icon class="mat-icon-input" matSuffix>monetization_on</mat-icon>
                 <mat-error *ngIf="editPostForm.controls['total'].hasError('required')">Total is required.</mat-error>
-                   <mat-error *ngIf="editPostForm.controls['total'].hasError('min')">Total must be either 0 or more.</mat-error>
+                <mat-error *ngIf="editPostForm.controls['total'].hasError('min')">Total must be either 0 or more.</mat-error>
                 <mat-hint></mat-hint>
             </mat-form-field>
             <div appearance="legacy" class="mat-icons-input upload-area">
@@ -97,7 +97,7 @@
                 <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 <mat-error *ngIf="editPostForm.controls['SharedWithCustomerOn'].hasError('required') &&
     editPostForm.controls['SharedWithCustomerOn'].touched">
-    Shared with Client is required
+                    Shared with Client is required
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="input-boxes">
