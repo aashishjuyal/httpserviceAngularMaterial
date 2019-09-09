@@ -283,6 +283,7 @@ export class EditpostComponent implements OnInit {
         }
       }
     });
+    return false;
   }
   deleteOk(data){
     if(data.docId != undefined){
