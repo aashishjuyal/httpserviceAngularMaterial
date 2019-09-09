@@ -97,7 +97,7 @@ export class EditpostComponent implements OnInit {
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
       'effort': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.min(0), this.noblankValidator]),
-      'total': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.min(0), this.noblankValidator]),
+      'total': new FormControl('',[Validators.pattern('^[0-9]*[\.]{0,1}[0-9]*$'),Validators.min(0), this.noblankValidator]),
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),
