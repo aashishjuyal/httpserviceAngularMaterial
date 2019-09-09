@@ -96,13 +96,8 @@ export class EditpostComponent implements OnInit {
       'desc': new FormControl('', [Validators.required,Validators.maxLength(250), this.noWhitespaceValidator]),
       'raisedby': new FormControl('', [Validators.required]),
       'RaisedOn': new FormControl('', [Validators.required]),
-<<<<<<< HEAD
-      'effort': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
-      'total': new FormControl('',[Validators.min(0),Validators.pattern(/^\d+$/)]),
-=======
       'effort': new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.min(0), this.noblankValidator]),
       'total': new FormControl('',[Validators.pattern('^[0-9]*[\.]{0,1}[0-9]*$'),Validators.min(0), this.noblankValidator]),
->>>>>>> 2c0150506cbae7d117cfed02eeab0e587bccd18e
       'status': new FormControl(''),
       'attachment': new FormControl(''),
       'Comments': new FormControl(''),

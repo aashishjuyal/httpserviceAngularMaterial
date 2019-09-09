@@ -19,16 +19,21 @@ html {
     color: #C3D2F3;
 }
 
+.mat-dialog-content {
+    padding: 24px 24px;
+}
+
 
 /*for dialogue box*/
 
 .dialogue-del {
     text-align: center;
 }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .popup-icon {
@@ -47,7 +52,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .popup {
     text-align: center;
-    min-width: 250px;
+    min-width: 400px;
     max-width: 400px;
 }
 

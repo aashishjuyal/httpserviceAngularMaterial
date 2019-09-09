@@ -40,28 +40,22 @@
                 <label>Effort</label>
                 <input matInput placeholder="" maxlength="5" formControlName="effort" type="number" onkeydown="return event.keyCode !== 69">
                 <mat-icon class="mat-icon-input" matSuffix>access_time</mat-icon>
-<<<<<<< HEAD
-                <mat-error *ngIf="editPostForm.controls['effort'].hasError('min')">Effort must be either 0 or more.</mat-error>
-                <mat-error *ngIf="editPostForm.controls['effort'].hasError('minLength') || editPostForm.controls['effort'].hasError('pattern')">Effort must be either 0 or more.</mat-error>
-=======
                 <mat-error *ngIf="editPostForm.controls['effort'].hasError('pattern') ||
                                   editPostForm.controls['effort'].hasError('min') ||
                                   editPostForm.controls['effort'].hasError('blankIn')">
-                  Effort must be either 0 or more.</mat-error>
->>>>>>> 2c0150506cbae7d117cfed02eeab0e587bccd18e
+                    Effort must be either 0 or more.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" class="mat-icons-input">
                 <label>Total</label>
-                <input matInput placeholder="" maxlength="10" formControlName="total" type="number"  onkeydown="return event.keyCode !== 69">
+                <input matInput placeholder="" maxlength="10" formControlName="total" type="number" onkeydown="return event.keyCode !== 69">
                 <mat-icon class="mat-icon-input" matSuffix>monetization_on</mat-icon>
-<<<<<<< HEAD
                 <mat-error *ngIf="editPostForm.controls['total'].hasError('required')">Total is required.</mat-error>
                 <mat-error *ngIf="editPostForm.controls['total'].hasError('min')">Total must be either 0 or more.</mat-error>
-=======
+
                 <mat-error *ngIf="editPostForm.controls['total'].hasError('pattern') ||
                 editPostForm.controls['total'].hasError('min') ||
                 editPostForm.controls['total'].hasError('blankIn')">Total must be either 0 or more.</mat-error>
->>>>>>> 2c0150506cbae7d117cfed02eeab0e587bccd18e
+
                 <mat-hint></mat-hint>
             </mat-form-field>
             <div appearance="legacy" class="mat-icons-input upload-area">
