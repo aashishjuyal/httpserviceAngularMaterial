@@ -79,3 +79,22 @@
 
     </div>
 </div>
+<div *ngIf="data.isUploadError" class="confirmation-dialogue-box">
+  <div mat-dialog-content class="popup ">
+
+      <div class="popup-icon error-icon ">
+          <span>!</span>
+      </div>
+      <h1 mat-dialog-title>Error</h1>
+      <p>Unsupported files.</p>
+      <h5 class="file-desc">File Name</h5>
+      <div class="uploaded-section" *ngFor="let fileD of data.fileData">
+          <p>{{ fileD }}</p>
+      </div>
+  </div>
+
+  <div mat-dialog-actions>
+      <button mat-button (click)="closeDialog() " class="dialogue-btn cancelled-ok">OK</button>
+
+  </div>
+</div>
