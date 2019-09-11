@@ -54,6 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     min-width: 400px;
     max-width: 400px;
+    overflow: hidden;
 }
 
 .popup h1 {
@@ -137,6 +138,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .download-dialogue-box .popup {
     text-align: justify;
+    overflow: hidden;
+    min-width: 450px;
 }
 
 .file-desc span {
@@ -150,11 +153,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .uploaded-section p {
-    width: 90%
+    padding-right: 20px;
+    width: 90%;
+    padding-left: 10px;
+    overflow-wrap: break-word;
 }
 
 .download-dialogue-box button {
     float: right;
+}
+
+.uploaded-area {
+    overflow-y: scroll;
+    max-height: 150px;
 }
 
 
